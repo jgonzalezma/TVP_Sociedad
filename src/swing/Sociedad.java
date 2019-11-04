@@ -20,6 +20,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import java.awt.SystemColor;
 
 public class Sociedad extends JFrame {
 
@@ -66,32 +68,35 @@ public class Sociedad extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenuItem mntmRefrescos = new JMenuItem("Refrescos");
+		mntmRefrescos.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mntmRefrescos);
 		
 		JMenuItem mntmBebi = new JMenuItem("Bebidas alcoholicas");
+		mntmBebi.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mntmBebi);
 		
 		JMenuItem mntmTabaco = new JMenuItem("Tabaco");
+		mntmTabaco.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mntmTabaco);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 215, 0));
+		contentPane.setBackground(SystemColor.control);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel_refrescos = new JPanel();
-		panel_refrescos.setBackground(Color.ORANGE);
-		panel_refrescos.setBounds(0, 0, 149, 300);
+		panel_refrescos.setBackground(new Color(0, 204, 255));
+		panel_refrescos.setBounds(0, 0, 161, 300);
 		contentPane.add(panel_refrescos);
 				
 		JPanel panel_bebidas = new JPanel();
-		panel_bebidas.setBackground(Color.ORANGE);
-		panel_bebidas.setBounds(171, 0, 127, 300);
+		panel_bebidas.setBackground(new Color(0, 204, 255));
+		panel_bebidas.setBounds(180, 0, 161, 300);
 		contentPane.add(panel_bebidas);
 		
 		JPanel panel_tabaco = new JPanel();
-		panel_tabaco.setBackground(Color.ORANGE);
-		panel_tabaco.setBounds(320, 0, 127, 300);
+		panel_tabaco.setBackground(new Color(0, 204, 255));
+		panel_tabaco.setBounds(362, 0, 165, 300);
 		contentPane.add(panel_tabaco);
 		
 		/* Consulta a la base de datos los productos, y lo pone como 1 producto = 1 boton (3 columnas, refrescos, 

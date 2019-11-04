@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.Color;
+import java.awt.Font;
 
 public class Login extends JFrame {
 
@@ -69,7 +70,7 @@ public class Login extends JFrame {
 		});
 		
 		txtfield_user.setToolTipText("");
-		txtfield_user.setBounds(10, 36, 152, 31);
+		txtfield_user.setBounds(10, 97, 152, 31);
 		contentPane.add(txtfield_user);
 		txtfield_user.setColumns(10);
 		txtfield_user.requestFocus();
@@ -82,7 +83,7 @@ public class Login extends JFrame {
 			}
 		});
 		txtfield_password.setColumns(10);
-		txtfield_password.setBounds(10, 103, 152, 31);
+		txtfield_password.setBounds(10, 164, 152, 31);
 		contentPane.add(txtfield_password);
 			
 		JButton btn_login = new JButton("Log in");
@@ -109,8 +110,6 @@ public class Login extends JFrame {
 							
 							if (username.equals(rs.getString("num_usuario")) && password.equals(rs.getString("pass_usuario"))) {
 								JOptionPane.showMessageDialog(null, "Has logeado correctamente");
-								System.out.println(rs.getString("num_usuario"));
-								System.out.println(rs.getString("pass_usuario"));
 								Sociedad frame;
 								try {
 									frame = new Sociedad();
@@ -126,8 +125,6 @@ public class Login extends JFrame {
 								dispose();
 							}else {
 								JOptionPane.showMessageDialog(null, "Datos incorrectos, intentalo de nuevo");
-								System.out.println(rs.getString("num_usuario"));
-								System.out.println(rs.getString("pass_usuario"));
 							}
 							}
 					} catch (SQLException e1) {
@@ -147,15 +144,15 @@ public class Login extends JFrame {
 			}
 		});
 		
-		btn_login.setBounds(32, 144, 103, 37);
+		btn_login.setBounds(35, 228, 103, 37);
 		contentPane.add(btn_login);
 		
 		JLabel lblUsuario = new JLabel("Numero de usuario");
-		lblUsuario.setBounds(40, 11, 152, 14);
+		lblUsuario.setBounds(43, 72, 152, 14);
 		contentPane.add(lblUsuario);
 		
 		JLabel lblContrasena = new JLabel("Contrase\u00F1a");
-		lblContrasena.setBounds(53, 78, 72, 14);
+		lblContrasena.setBounds(51, 139, 72, 14);
 		contentPane.add(lblContrasena);
 		
 		JButton btn_7 = new JButton("7");
@@ -267,6 +264,11 @@ public class Login extends JFrame {
 		
 		btn_borrar.setBounds(265, 221, 110, 50);
 		contentPane.add(btn_borrar);
+		
+		JLabel lblTpvSociedad = new JLabel("TPV SOCIEDAD");
+		lblTpvSociedad.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 20));
+		lblTpvSociedad.setBounds(20, 26, 142, 24);
+		contentPane.add(lblTpvSociedad);
 	}
 	
 	public void anadirNumero(int num) {
@@ -277,5 +279,4 @@ public class Login extends JFrame {
 		}
 		
 	}
-			
 }

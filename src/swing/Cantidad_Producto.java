@@ -18,6 +18,7 @@ import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 import swing.Sociedad;
+import java.awt.Color;
 
 public class Cantidad_Producto extends JFrame {
 
@@ -54,6 +55,7 @@ public class Cantidad_Producto extends JFrame {
 		Sociedad sociedad = new Sociedad();
 		
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -64,6 +66,7 @@ public class Cantidad_Producto extends JFrame {
 		conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
 		
 		txtfield_cantidad = new JTextField();
+		txtfield_cantidad.setBackground(new Color(0, 255, 204));
 		txtfield_cantidad.setText("1");
 		txtfield_cantidad.setBounds(136, 46, 140, 36);
 		contentPane.add(txtfield_cantidad);
