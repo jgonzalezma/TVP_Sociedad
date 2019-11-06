@@ -99,46 +99,32 @@ public class Sociedad extends JFrame {
 		panel_tabaco.setBounds(362, 0, 165, 300);
 		contentPane.add(panel_tabaco);
 		
-		/* Consulta a la base de datos los productos, y lo pone como 1 producto = 1 boton (3 columnas, refrescos, 
-		 	bebidas alcoholicas y tabaco )
-		 */
 		try {
-			
 			Statement st = conexion.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * from refrescos");
 			while(rs.next()) {
 				JButton btnNewButton = new JButton(rs.getString("nombre"));
-				// Creamos 2 variables para precio y cantidad para guardarlos y usarlos despues
 				String precio = rs.getString("precio");
 				int cantidadDisponible = rs.getInt("cantidad_disponible");
 				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						/*
-						 * Creamos el frame nuevo y metemos los valores de las variables de precio y cantidad
-						 */
+					public void actionPerformed(ActionEvent arg0) {
 						Cantidad_Producto cantidadProducto;
 						try {
 							cantidadProducto = new Cantidad_Producto();
-							String cantidad = cantidadProducto.txtfield_cantidad.getText();
-							int c = Integer.parseInt(cantidad);
-							double p = Double.parseDouble(precio);
-							double res = (double) (p * c);
-							cantidadProducto.txtfield_precio.setText(Double.toString(res));
 							cantidadProducto.setVisible(true);
 							cantidadProducto.txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
-						} catch (ClassNotFoundException e1) {
+							cantidadProducto.txtfield_precio.setText(precio + "€");
+						} catch (ClassNotFoundException | SQLException e) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							e.printStackTrace();
 						}
 						
 					}
 				});
 				panel_refrescos.add(btnNewButton);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

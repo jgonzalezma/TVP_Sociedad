@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -28,7 +29,7 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtfield_user;
 	private JTextField txtfield_password;
-	boolean focusUser;
+	boolean focusUser = true;
 
 	/**
 	 * Launch the application.
@@ -75,7 +76,7 @@ public class Login extends JFrame {
 		txtfield_user.setColumns(10);
 		txtfield_user.requestFocus();
 		
-		txtfield_password = new JTextField();
+		txtfield_password = new JPasswordField();
 		txtfield_password.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
