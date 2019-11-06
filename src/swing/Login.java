@@ -248,16 +248,7 @@ public class Login extends JFrame {
 		JButton btn_borrar = new JButton("<---");
 		btn_borrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int length = txtfield_user.getText().length();
-				int number = txtfield_user.getText().length() -1;
-				String store;
-				
-				if(length > 0) {
-					StringBuilder back = new StringBuilder(txtfield_user.getText());
-					back.deleteCharAt(number);
-					store = back.toString();
-					txtfield_user.setText(store);
-				}
+				borrarNumero();
 			}
 		});
 		
@@ -278,5 +269,31 @@ public class Login extends JFrame {
 			txtfield_password.setText(txtfield_password.getText() + num);
 		}
 		
+	}
+	
+	public void borrarNumero() {
+		if(focusUser == true ) {
+			int length = txtfield_user.getText().length();
+			int number = txtfield_user.getText().length() -1;
+			String store;
+			
+			if(length > 0) {
+				StringBuilder back = new StringBuilder(txtfield_user.getText());
+				back.deleteCharAt(number);
+				store = back.toString();
+				txtfield_user.setText(store);
+			}
+		}else {
+			int length = txtfield_password.getText().length();
+			int number = txtfield_password.getText().length() -1;
+			String store;
+			
+			if(length > 0) {
+				StringBuilder back = new StringBuilder(txtfield_password.getText());
+				back.deleteCharAt(number);
+				store = back.toString();
+				txtfield_password.setText(store);
+			}
+		}
 	}
 }
