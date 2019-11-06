@@ -101,7 +101,7 @@ public class Sociedad extends JFrame {
 		
 		try {
 			Statement st = conexion.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * from refrescos");
+			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = 'refresco'");
 			while(rs.next()) {
 				JButton btnNewButton = new JButton(rs.getString("nombre"));
 				String precio = rs.getString("precio");
@@ -130,7 +130,7 @@ public class Sociedad extends JFrame {
 		
 		try {
 			Statement st = conexion.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * from bebidas_alcoholicas");
+			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = 'bebida_alcoholica'");
 			while(rs.next()) {
 				JButton btnNewButton = new JButton(rs.getString("nombre"));
 				String precio = rs.getString("precio");
@@ -159,7 +159,7 @@ public class Sociedad extends JFrame {
 		
 		try {
 			Statement st = conexion.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * from tabaco");
+			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = 'tabaco'");
 			while(rs.next()) {
 				JButton btnNewButton = new JButton(rs.getString("nombre"));
 				String precio = rs.getString("precio");

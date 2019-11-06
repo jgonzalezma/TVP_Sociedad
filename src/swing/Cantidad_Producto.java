@@ -70,7 +70,7 @@ public class Cantidad_Producto extends JFrame {
 		conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
 		
 		Statement st = conexion.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * from refrescos");
+		ResultSet rs = st.executeQuery("SELECT * from productos");
 		
 		txtfield_cantidad = new JTextField();
 		txtfield_cantidad.addMouseListener(new MouseAdapter() {
@@ -85,7 +85,7 @@ public class Cantidad_Producto extends JFrame {
 						int c = Integer.parseInt(cantidad);
 						double p = Double.parseDouble(precio);
 						double res = (double) (p * c);
-						txtfield_precio.setText(Double.toString(res));
+						txtfield_precio.setText(Double.toString(res) + "€");
 						txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
