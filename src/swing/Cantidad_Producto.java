@@ -23,6 +23,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class Cantidad_Producto extends JFrame {
 
@@ -64,41 +65,49 @@ public class Cantidad_Producto extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel label_nombreProducto = new JLabel("");
+		label_nombreProducto.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		label_nombreProducto.setBounds(262, 308, 140, 22);
+		contentPane.add(label_nombreProducto);
+		
 		// Conexion a base de datos
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection conexion = null;
 		conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
 		
-		Statement st = conexion.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * from productos");
-		
 		txtfield_cantidad = new JTextField();
 		txtfield_cantidad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				try {
-					while(rs.next()) {
-					try {
-						String precio = rs.getString("precio");
-						int cantidadDisponible = rs.getInt("cantidad_disponible");
-						String cantidad = txtfield_cantidad.getText();
-						int c = Integer.parseInt(cantidad);
-						double p = Double.parseDouble(precio);
-						double res = (double) (p * c);
-						txtfield_precio.setText(Double.toString(res) + "€");
-						txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-}
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+						
+						try {
+							Class.forName("com.mysql.jdbc.Driver");
+							Connection conexion = null;
+							conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
+							Statement st = conexion.createStatement();
+							ResultSet rs = st.executeQuery("SELECT * from productos");
+							while(rs.next()) {
+							int id = rs.getInt("id");
+							String nombre = rs.getString("nombre");
+							String precio = rs.getString("precio");
+							label_nombreProducto.setText(nombre);
+							int cantidadDisponible = rs.getInt("cantidad_disponible");
+							String cantidad = txtfield_cantidad.getText();
+							int c = Integer.parseInt(cantidad);
+							double p = Double.parseDouble(precio);
+							double res = (double) (p * c);
+							txtfield_precio.setText(Double.toString(res) + "€");
+							txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
+							System.out.println(id);
+						}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
 			}
 		});
 		
