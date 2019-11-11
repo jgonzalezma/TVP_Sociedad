@@ -1,6 +1,5 @@
 package swing;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -19,8 +18,6 @@ import java.awt.event.ActionEvent;
 
 import swing.Sociedad;
 import java.awt.Color;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
@@ -31,6 +28,10 @@ public class Cantidad_Producto extends JFrame {
 	public JTextField txtfield_cantidad;
 	public JTextField txtfield_cantidadDisponible;
 	public JTextField txtfield_precio;
+	JLabel lblProducto = new JLabel("");
+	
+	public int idSeleccionado;
+	
 
 	/**
 	 * Launch the application.
@@ -65,51 +66,15 @@ public class Cantidad_Producto extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label_nombreProducto = new JLabel("");
-		label_nombreProducto.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label_nombreProducto.setBounds(262, 308, 140, 22);
-		contentPane.add(label_nombreProducto);
-		
 		// Conexion a base de datos
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection conexion = null;
 		conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
+		Statement st = conexion.createStatement();
+		ResultSet rs = st.executeQuery("SELECT * from productos");
 		
 		txtfield_cantidad = new JTextField();
-		txtfield_cantidad.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-						
-						try {
-							Class.forName("com.mysql.jdbc.Driver");
-							Connection conexion = null;
-							conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
-							Statement st = conexion.createStatement();
-							ResultSet rs = st.executeQuery("SELECT * from productos");
-							while(rs.next()) {
-							int id = rs.getInt("id");
-							String nombre = rs.getString("nombre");
-							String precio = rs.getString("precio");
-							label_nombreProducto.setText(nombre);
-							int cantidadDisponible = rs.getInt("cantidad_disponible");
-							String cantidad = txtfield_cantidad.getText();
-							int c = Integer.parseInt(cantidad);
-							double p = Double.parseDouble(precio);
-							double res = (double) (p * c);
-							txtfield_precio.setText(Double.toString(res) + "€");
-							txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
-							System.out.println(id);
-						}
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-			}
-		});
+		txtfield_cantidad.setEditable(false);
 		
 		txtfield_cantidad.setBackground(new Color(0, 255, 204));
 		txtfield_cantidad.setText("1");
@@ -142,8 +107,8 @@ public class Cantidad_Producto extends JFrame {
 		lblPrecio.setBounds(321, 23, 46, 14);
 		contentPane.add(lblPrecio);
 		
-		JButton button = new JButton("<---");
-		button.addActionListener(new ActionListener() {
+		JButton btt_borrar = new JButton("<---");
+		btt_borrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int length = txtfield_cantidad.getText().length();
 				int number = txtfield_cantidad.getText().length() -1;
@@ -157,98 +122,238 @@ public class Cantidad_Producto extends JFrame {
 				}
 			}
 		});
-		button.setBounds(80, 290, 110, 50);
-		contentPane.add(button);
+		btt_borrar.setBounds(80, 290, 110, 50);
+		contentPane.add(btt_borrar);
 		
-		JButton button_1 = new JButton("0");
-		button_1.addActionListener(new ActionListener() {
+		JButton btt_0 = new JButton("0");
+		btt_0.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btt_0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(0);
 			}
 		});
-		button_1.setBounds(20, 290, 50, 50);
-		contentPane.add(button_1);
+		btt_0.setBounds(20, 290, 50, 50);
+		contentPane.add(btt_0);
 		
-		JButton button_2 = new JButton("1");
-		button_2.addActionListener(new ActionListener() {
+		JButton btn_1 = new JButton("1");
+		btn_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btn_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(1);
 			}
 		});
-		button_2.setBounds(20, 223, 50, 50);
-		contentPane.add(button_2);
+		btn_1.setBounds(20, 223, 50, 50);
+		contentPane.add(btn_1);
 		
-		JButton button_3 = new JButton("2");
-		button_3.addActionListener(new ActionListener() {
+		JButton btn_2 = new JButton("2");
+		btn_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btn_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(2);
 			}
 		});
-		button_3.setBounds(80, 223, 50, 50);
-		contentPane.add(button_3);
+		btn_2.setBounds(80, 223, 50, 50);
+		contentPane.add(btn_2);
 		
-		JButton button_4 = new JButton("3");
-		button_4.addActionListener(new ActionListener() {
+		JButton btt_3 = new JButton("3");
+		btt_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btt_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(3);
 			}
 		});
-		button_4.setBounds(142, 223, 50, 50);
-		contentPane.add(button_4);
+		btt_3.setBounds(142, 223, 50, 50);
+		contentPane.add(btt_3);
 		
-		JButton button_5 = new JButton("6");
-		button_5.addActionListener(new ActionListener() {
+		JButton btt_6 = new JButton("6");
+		btt_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btt_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(6);
 			}
 		});
-		button_5.setBounds(142, 162, 50, 50);
-		contentPane.add(button_5);
+		btt_6.setBounds(142, 162, 50, 50);
+		contentPane.add(btt_6);
 		
-		JButton button_6 = new JButton("9");
-		button_6.addActionListener(new ActionListener() {
+		JButton btt_9 = new JButton("9");
+		btt_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btt_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(9);
 			}
 		});
-		button_6.setBounds(140, 100, 50, 50);
-		contentPane.add(button_6);
+		btt_9.setBounds(140, 100, 50, 50);
+		contentPane.add(btt_9);
 		
-		JButton button_7 = new JButton("5");
-		button_7.addActionListener(new ActionListener() {
+		JButton btt_5 = new JButton("5");
+		btt_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btt_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(5);
 			}
 		});
-		button_7.setBounds(80, 162, 50, 50);
-		contentPane.add(button_7);
+		btt_5.setBounds(80, 162, 50, 50);
+		contentPane.add(btt_5);
 		
-		JButton button_8 = new JButton("4");
-		button_8.addActionListener(new ActionListener() {
+		JButton btt_4 = new JButton("4");
+		btt_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btt_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(4);
 			}
 		});
-		button_8.setBounds(20, 162, 50, 50);
-		contentPane.add(button_8);
+		btt_4.setBounds(20, 162, 50, 50);
+		contentPane.add(btt_4);
 		
-		JButton button_9 = new JButton("7");
-		button_9.addActionListener(new ActionListener() {
+		JButton btt_7 = new JButton("7");
+		btt_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btt_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(7);
 			}
 		});
-		button_9.setBounds(20, 100, 50, 50);
-		contentPane.add(button_9);
+		btt_7.setBounds(20, 100, 50, 50);
+		contentPane.add(btt_7);
 		
-		JButton button_10 = new JButton("8");
-		button_10.addActionListener(new ActionListener() {
+		JButton btt_8 = new JButton("8");
+		btt_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btt_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(8);
 			}
 		});
-		button_10.setBounds(80, 100, 50, 50);
-		contentPane.add(button_10);
+		btt_8.setBounds(80, 100, 50, 50);
+		contentPane.add(btt_8);
 		
 		JButton btnPagar = new JButton("Pagar");
 		btnPagar.addActionListener(new ActionListener() {
@@ -268,9 +373,43 @@ public class Cantidad_Producto extends JFrame {
 		});
 		btnSalir.setBounds(260, 205, 126, 50);
 		contentPane.add(btnSalir);
+		lblProducto.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+		
+		
+		lblProducto.setBounds(260, 308, 126, 32);
+		contentPane.add(lblProducto);
 		
 	}
 	public void anadirNumero(int num) {
 		txtfield_cantidad.setText(txtfield_cantidad.getText() + num);		
+	}
+	public void actualizar() throws ClassNotFoundException, SQLException {
+		// Conexion a base de datos
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection conexion = null;
+		conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
+		
+		Statement st = conexion.createStatement();
+		ResultSet rs = st.executeQuery("SELECT * from productos");
+		System.out.println(idSeleccionado);
+		try {
+			while(rs.next()) {
+			int id = rs.getInt("id");
+			String nombre = rs.getString("nombre");
+			String precio = rs.getString("precio");
+			lblProducto.setText(nombre);
+			int cantidadDisponible = rs.getInt("cantidad_disponible");
+			String cantidad = txtfield_cantidad.getText();
+			int c = Integer.parseInt(cantidad);
+			double p = Double.parseDouble(precio);
+			double res = (double) (p * c);
+			txtfield_precio.setText(Double.toString(res) + "€");
+			txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
+			System.out.println(id);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -103,7 +103,8 @@ public class Sociedad extends JFrame {
 			Statement st = conexion.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = 'refresco'");
 			while(rs.next()) {
-				JButton btnNewButton = new JButton(rs.getString("nombre"));
+				String nombre = rs.getString("nombre");
+				JButton btnNewButton = new JButton(nombre);
 				String precio = rs.getString("precio");
 				int cantidadDisponible = rs.getInt("cantidad_disponible");
 				btnNewButton.addActionListener(new ActionListener() {
@@ -111,14 +112,15 @@ public class Sociedad extends JFrame {
 						Cantidad_Producto cantidadProducto;
 						try {
 							cantidadProducto = new Cantidad_Producto();
+							//cantidadProducto.idSeleccionado = rs.getInt("id");
 							cantidadProducto.setVisible(true);
 							cantidadProducto.txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
 							cantidadProducto.txtfield_precio.setText(precio + "€");
+							cantidadProducto.lblProducto.setText(nombre);
 						} catch (ClassNotFoundException | SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
-						
+						}		
 					}
 				});
 				panel_refrescos.add(btnNewButton);
@@ -132,6 +134,7 @@ public class Sociedad extends JFrame {
 			Statement st = conexion.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = 'bebida_alcoholica'");
 			while(rs.next()) {
+				String nombre = rs.getString("nombre");
 				JButton btnNewButton = new JButton(rs.getString("nombre"));
 				String precio = rs.getString("precio");
 				int cantidadDisponible = rs.getInt("cantidad_disponible");
@@ -143,6 +146,7 @@ public class Sociedad extends JFrame {
 							cantidadProducto.setVisible(true);
 							cantidadProducto.txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
 							cantidadProducto.txtfield_precio.setText(precio + "€");
+							cantidadProducto.lblProducto.setText(nombre);
 						} catch (ClassNotFoundException | SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -161,23 +165,23 @@ public class Sociedad extends JFrame {
 			Statement st = conexion.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = 'tabaco'");
 			while(rs.next()) {
-				JButton btnNewButton = new JButton(rs.getString("nombre"));
+				String nombre = rs.getString("nombre");
+				JButton btnNewButton = new JButton(nombre);
 				String precio = rs.getString("precio");
 				int cantidadDisponible = rs.getInt("cantidad_disponible");
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Cantidad_Producto cantidadProducto;
-						
 						try {
 							cantidadProducto = new Cantidad_Producto();
 							cantidadProducto.setVisible(true);
 							cantidadProducto.txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
 							cantidadProducto.txtfield_precio.setText(precio + "€");
+							cantidadProducto.lblProducto.setText(nombre);
 						} catch (ClassNotFoundException | SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
-						
+						}			
 					}
 				});
 				panel_tabaco.add(btnNewButton);
