@@ -1,9 +1,7 @@
 package swing;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,15 +11,20 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
+import javax.swing.JLabel;
 
 public class Sociedad extends JFrame {
 
@@ -68,14 +71,17 @@ public class Sociedad extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenuItem mntmRefrescos = new JMenuItem("Refrescos");
+		mntmRefrescos.setIcon(new ImageIcon("C:\\Users\\josu\\eclipse-workspace\\Login sociedad\\img\\i_refresco.png"));
 		mntmRefrescos.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mntmRefrescos);
 		
 		JMenuItem mntmBebi = new JMenuItem("Bebidas alcoholicas");
+		mntmBebi.setIcon(new ImageIcon("C:\\Users\\josu\\eclipse-workspace\\Login sociedad\\img\\i_alcohol.png"));
 		mntmBebi.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mntmBebi);
 		
 		JMenuItem mntmTabaco = new JMenuItem("Tabaco");
+		mntmTabaco.setIcon(new ImageIcon("C:\\Users\\josu\\eclipse-workspace\\Login sociedad\\img\\i_tabaco.png"));
 		mntmTabaco.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mntmTabaco);
 		contentPane = new JPanel();
@@ -189,6 +195,6 @@ public class Sociedad extends JFrame {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}      
 	}
 }
