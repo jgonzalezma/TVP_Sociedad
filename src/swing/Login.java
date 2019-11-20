@@ -111,17 +111,9 @@ public class Login extends JFrame {
 							
 							if (username.equals(rs.getString("num_usuario")) && password.equals(rs.getString("pass_usuario"))) {
 								JOptionPane.showMessageDialog(null, "Has logeado correctamente");
-								Sociedad frame;
-								try {
-									frame = new Sociedad();
-									frame.setVisible(true);
-								} catch (ClassNotFoundException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								} catch (SQLException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+								LoginOpciones frame;
+								frame = new LoginOpciones();
+								frame.setVisible(true);
 								
 								dispose();
 							}else {
