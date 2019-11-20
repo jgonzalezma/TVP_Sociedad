@@ -31,9 +31,6 @@ public class Cantidad_Producto extends JFrame {
 	public JTextField txtfield_precio;
 	JLabel lblProducto = new JLabel("");
 	
-	public int idSeleccionado;
-	
-
 	/**
 	 * Launch the application.
 	 */
@@ -400,8 +397,9 @@ public class Cantidad_Producto extends JFrame {
 		conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
 		
 		Statement st = conexion.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * from productos");
-		System.out.println(idSeleccionado);
+		Sociedad s = new Sociedad();
+		String tipo = s.getTipo();
+		ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = '"+tipo+"'");
 		try {
 			while(rs.next()) {
 			int id = rs.getInt("id");
