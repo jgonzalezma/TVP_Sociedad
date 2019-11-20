@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class Cantidad_Producto extends JFrame {
 
@@ -119,6 +120,15 @@ public class Cantidad_Producto extends JFrame {
 					back.deleteCharAt(number);
 					store = back.toString();
 					txtfield_cantidad.setText(store);
+					try {
+						actualizar();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		});
