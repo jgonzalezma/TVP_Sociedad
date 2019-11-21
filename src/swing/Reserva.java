@@ -13,10 +13,17 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JSpinnerDateEditor;
+
+import bean.Mesa;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class Reserva extends JFrame {
@@ -56,8 +63,8 @@ public class Reserva extends JFrame {
 		 
 		// Ubicar y agregar al panel
 		dateChooser.setBounds(0, 0, 50, 50);
-		JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		
+		JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		 
 		panel.add(dateChooser);
 		
@@ -69,7 +76,35 @@ public class Reserva extends JFrame {
 		btnReservar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Date date = dateChooser.getDate();
-				System.out.println(date);
+				// hay que parsear el date a sql date
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
+					
+					PreparedStatement pst = conexion.prepareStatement("INSERT INTO reservas (id_usuario, fecha) values (?,?)");
+					
+					Login l = new Login();
+					
+					Mesa mesa = new Mesa();
+					
+					mesa.setId_usuario(Login.username);
+					
+					
+					pst.setString(1, mesa.getId_usuario());
+					pst.setDate(2, null);
+					pst.execute();
+					
+					Mesa_Reservada mesareservada = new Mesa_Reservada();
+					mesareservada.setVisible(true);
+					System.out.println(date);
+					dispose();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		dateChooser.add(btnReservar, BorderLayout.SOUTH);

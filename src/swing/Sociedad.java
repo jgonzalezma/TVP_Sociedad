@@ -29,7 +29,8 @@ import javax.swing.JLabel;
 public class Sociedad extends JFrame {
 
 	private JPanel contentPane;
-	String tipo;
+	static String tipo, nombre, precio;
+	static int cantidadDisponible, id;
 
 	/**
 	 * Launch the application.

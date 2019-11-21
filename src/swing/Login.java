@@ -30,6 +30,7 @@ public class Login extends JFrame {
 	private JTextField txtfield_user;
 	private JTextField txtfield_password;
 	boolean focusUser = true;
+	static String username; //se declara static para despues acceder desde otra clase al valor de esta variable (asi sabemos que usuario ha logeado en  todo momento)
 
 	/**
 	 * Launch the application.
@@ -91,7 +92,7 @@ public class Login extends JFrame {
 				
 		btn_login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String username = txtfield_user.getText();
+				username = txtfield_user.getText();
 				String password = txtfield_password.getText();
 				
 				// Conexion a base de datos
@@ -111,6 +112,7 @@ public class Login extends JFrame {
 							
 							if (username.equals(rs.getString("num_usuario")) && password.equals(rs.getString("pass_usuario"))) {
 								JOptionPane.showMessageDialog(null, "Has logeado correctamente");
+								System.out.println(username);
 								LoginOpciones frame;
 								frame = new LoginOpciones();
 								frame.setVisible(true);

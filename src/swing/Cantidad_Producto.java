@@ -402,11 +402,11 @@ public class Cantidad_Producto extends JFrame {
 		ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = '"+tipo+"'");
 		try {
 			while(rs.next()) {
-			int id = rs.getInt("id");
-			String nombre = rs.getString("nombre");
-			String precio = rs.getString("precio");
+			int id = Sociedad.id;
+			String nombre = Sociedad.nombre;
+			String precio = Sociedad.precio;
 			lblProducto.setText(nombre);
-			int cantidadDisponible = rs.getInt("cantidad_disponible");
+			int cantidadDisponible = Sociedad.cantidadDisponible;
 			String cantidad = txtfield_cantidad.getText();
 			int c = Integer.parseInt(cantidad);
 			double p = Double.parseDouble(precio);
