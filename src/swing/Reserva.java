@@ -76,6 +76,7 @@ public class Reserva extends JFrame {
 		btnReservar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Date date = dateChooser.getDate();
+				Date fechaparsed = new java.sql.Date(date.getTime());
 				// hay que parsear el date a sql date
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
@@ -88,10 +89,11 @@ public class Reserva extends JFrame {
 					Mesa mesa = new Mesa();
 					
 					mesa.setId_usuario(Login.username);
+					mesa.setFecha((java.sql.Date) fechaparsed);
 					
 					
 					pst.setString(1, mesa.getId_usuario());
-					pst.setDate(2, null);
+					pst.setDate(2, new java.sql.Date(mesa.getFecha().getTime()));
 					pst.execute();
 					
 					Mesa_Reservada mesareservada = new Mesa_Reservada();
