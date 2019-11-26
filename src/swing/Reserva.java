@@ -1,18 +1,14 @@
 package swing;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JSpinnerDateEditor;
 
 import bean.Mesa;
 
@@ -23,8 +19,11 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class Reserva extends JFrame {
 
@@ -80,20 +79,17 @@ public class Reserva extends JFrame {
 				// hay que parsear el date a sql date
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
-					Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
-					
-					PreparedStatement pst = conexion.prepareStatement("INSERT INTO reservas (id_usuario, fecha) values (?,?)");
-					
-					Login l = new Login();
+					Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");			
+					PreparedStatement pst = conexion.prepareStatement("INSERT INTO reservas (id_usuario, fecha, mesa) values (?,?,?)");
 					
 					Mesa mesa = new Mesa();
 					
 					mesa.setId_usuario(Login.username);
 					mesa.setFecha((java.sql.Date) fechaparsed);
 					
-					
 					pst.setString(1, mesa.getId_usuario());
 					pst.setDate(2, new java.sql.Date(mesa.getFecha().getTime()));
+					pst.setInt(3, 1);
 					pst.execute();
 					
 					Mesa_Reservada mesareservada = new Mesa_Reservada();
@@ -110,6 +106,31 @@ public class Reserva extends JFrame {
 			}
 		});
 		dateChooser.add(btnReservar, BorderLayout.SOUTH);
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conexion;
+			try {
+				conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
+				Statement st = conexion.createStatement();
+				String sql = "SELECT * FROM mesa";
+				ResultSet rs = st.executeQuery(sql);
+				while(rs.next()) {
+					String nombre = rs.getString("nombre");
+					JComboBox comboBox = new JComboBox();
+					comboBox.addItem(nombre);
+					panel.add(comboBox, BorderLayout.SOUTH);
+				}
+				
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}
 
 }
