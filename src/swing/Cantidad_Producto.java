@@ -21,7 +21,6 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
-import javax.swing.ImageIcon;
 
 public class Cantidad_Producto extends JFrame {
 
@@ -56,20 +55,11 @@ public class Cantidad_Producto extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 410);
 		
-		Sociedad sociedad = new Sociedad();
-		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		// Conexion a base de datos
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection conexion = null;
-		conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
-		Statement st = conexion.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * from productos");
 		
 		txtfield_cantidad = new JTextField();
 		txtfield_cantidad.setEditable(false);
@@ -120,10 +110,8 @@ public class Cantidad_Producto extends JFrame {
 					try {
 						actualizar();
 					} catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -139,10 +127,8 @@ public class Cantidad_Producto extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -162,10 +148,8 @@ public class Cantidad_Producto extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -185,10 +169,8 @@ public class Cantidad_Producto extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -208,10 +190,8 @@ public class Cantidad_Producto extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -231,10 +211,8 @@ public class Cantidad_Producto extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -254,10 +232,8 @@ public class Cantidad_Producto extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -277,10 +253,8 @@ public class Cantidad_Producto extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -300,10 +274,8 @@ public class Cantidad_Producto extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -323,10 +295,8 @@ public class Cantidad_Producto extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -346,10 +316,8 @@ public class Cantidad_Producto extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -403,10 +371,10 @@ public class Cantidad_Producto extends JFrame {
 		try {
 			while(rs.next()) {
 			int id = Sociedad.id;
-			String nombre = Sociedad.nombre;
-			String precio = Sociedad.precio;
+			String nombre = rs.getString("nombre");
+			String precio = rs.getString("precio");
 			lblProducto.setText(nombre);
-			int cantidadDisponible = Sociedad.cantidadDisponible;
+			int cantidadDisponible = rs.getInt("cantidad_disponible");
 			String cantidad = txtfield_cantidad.getText();
 			int c = Integer.parseInt(cantidad);
 			double p = Double.parseDouble(precio);
@@ -416,7 +384,6 @@ public class Cantidad_Producto extends JFrame {
 			System.out.println(id);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -20,7 +20,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -112,7 +111,6 @@ public class Login extends JFrame {
 							
 							if (username.equals(rs.getString("num_usuario")) && password.equals(rs.getString("pass_usuario"))) {
 								JOptionPane.showMessageDialog(null, "Has logeado correctamente");
-								System.out.println(username);
 								LoginOpciones frame;
 								frame = new LoginOpciones();
 								frame.setVisible(true);
@@ -123,19 +121,13 @@ public class Login extends JFrame {
 							}
 							}
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				} catch (ClassNotFoundException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-
-
-
 			}
 		});
 		

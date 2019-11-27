@@ -1,13 +1,11 @@
 package swing;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.CardLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -66,10 +64,8 @@ public class LoginOpciones extends JFrame {
 					sociedad.setVisible(true);
 					dispose();
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

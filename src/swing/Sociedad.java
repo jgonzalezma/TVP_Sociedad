@@ -13,18 +13,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
-import javax.swing.JLabel;
+
 
 public class Sociedad extends JFrame {
 
@@ -43,10 +38,8 @@ public class Sociedad extends JFrame {
 					frame = new Sociedad();
 					frame.setVisible(true);
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -128,7 +121,6 @@ public class Sociedad extends JFrame {
 							cantidadProducto.lblProducto.setText(nombre);
 							System.out.println(id);
 						} catch (ClassNotFoundException | SQLException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}		
 					}
@@ -136,7 +128,6 @@ public class Sociedad extends JFrame {
 				panel_refrescos.add(btnNewButton);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -161,7 +152,6 @@ public class Sociedad extends JFrame {
 							cantidadProducto.lblProducto.setText(nombre);
 							System.out.println(id);
 						} catch (ClassNotFoundException | SQLException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						
@@ -170,7 +160,6 @@ public class Sociedad extends JFrame {
 				panel_bebidas.add(btnNewButton);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -195,7 +184,6 @@ public class Sociedad extends JFrame {
 							cantidadProducto.lblProducto.setText(nombre);
 							System.out.println(id);
 						} catch (ClassNotFoundException | SQLException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}			
 					}
@@ -203,13 +191,11 @@ public class Sociedad extends JFrame {
 				panel_tabaco.add(btnNewButton);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}      
 	}
 
 	public String getTipo() {
-		// TODO Auto-generated method stub
 		return tipo;
 	}
 }
