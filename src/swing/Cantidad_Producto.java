@@ -365,8 +365,7 @@ public class Cantidad_Producto extends JFrame {
 		conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
 		
 		Statement st = conexion.createStatement();
-		Sociedad s = new Sociedad();
-		String tipo = s.getTipo();
+		String tipo = Sociedad.tipo;
 		ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = '"+tipo+"'");
 		try {
 			while(rs.next()) {
