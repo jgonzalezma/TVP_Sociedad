@@ -107,13 +107,7 @@ public class Cantidad_Producto extends JFrame {
 					back.deleteCharAt(number);
 					store = back.toString();
 					txtfield_cantidad.setText(store);
-					try {
-						actualizar();
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+					actualizar();
 				}
 			}
 		});
@@ -124,13 +118,7 @@ public class Cantidad_Producto extends JFrame {
 		btt_0.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					actualizar();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				actualizar();
 			}
 		});
 		btt_0.addActionListener(new ActionListener() {
@@ -145,13 +133,7 @@ public class Cantidad_Producto extends JFrame {
 		btn_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					actualizar();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				actualizar();
 			}
 		});
 		btn_1.addActionListener(new ActionListener() {
@@ -166,13 +148,7 @@ public class Cantidad_Producto extends JFrame {
 		btn_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					actualizar();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				actualizar();
 			}
 		});
 		btn_2.addActionListener(new ActionListener() {
@@ -187,13 +163,7 @@ public class Cantidad_Producto extends JFrame {
 		btt_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					actualizar();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				actualizar();
 			}
 		});
 		btt_3.addActionListener(new ActionListener() {
@@ -208,13 +178,7 @@ public class Cantidad_Producto extends JFrame {
 		btt_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					actualizar();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				actualizar();
 			}
 		});
 		btt_6.addActionListener(new ActionListener() {
@@ -229,13 +193,7 @@ public class Cantidad_Producto extends JFrame {
 		btt_9.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					actualizar();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				actualizar();
 			}
 		});
 		btt_9.addActionListener(new ActionListener() {
@@ -250,13 +208,7 @@ public class Cantidad_Producto extends JFrame {
 		btt_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					actualizar();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				actualizar();
 			}
 		});
 		btt_5.addActionListener(new ActionListener() {
@@ -271,13 +223,7 @@ public class Cantidad_Producto extends JFrame {
 		btt_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					actualizar();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				actualizar();
 			}
 		});
 		btt_4.addActionListener(new ActionListener() {
@@ -292,13 +238,7 @@ public class Cantidad_Producto extends JFrame {
 		btt_7.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					actualizar();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				actualizar();
 			}
 		});
 		btt_7.addActionListener(new ActionListener() {
@@ -313,13 +253,7 @@ public class Cantidad_Producto extends JFrame {
 		btt_8.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					actualizar();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				actualizar();
 			}
 		});
 		btt_8.addActionListener(new ActionListener() {
@@ -358,7 +292,40 @@ public class Cantidad_Producto extends JFrame {
 	public void anadirNumero(int num) {
 		txtfield_cantidad.setText(txtfield_cantidad.getText() + num);		
 	}
-	public void actualizar() throws ClassNotFoundException, SQLException {
+	public void actualizar() {
+		String nombre = Sociedad.nombre;
+		System.out.println(nombre);
+		String precio = Sociedad.precio;
+		int cantidadDisponible = Sociedad.cantidadDisponible;
+		String cantidad = txtfield_cantidad.getText();
+		int c = Integer.parseInt(cantidad);
+		double p = Double.parseDouble(precio);
+		double res = (double) (p*c);
+		
+		// Conexion a base de datos
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conexion = null;
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
+			
+			Statement st = conexion.createStatement();
+			String tipo = Sociedad.tipo;
+			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = '"+tipo+"'");
+			
+			txtfield_precio.setText(Double.toString(res) + "€");
+			txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void actualizar2() throws ClassNotFoundException, SQLException {
 		// Conexion a base de datos
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection conexion = null;

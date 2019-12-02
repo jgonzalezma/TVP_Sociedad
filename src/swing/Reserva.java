@@ -120,7 +120,6 @@ public class Reserva extends JFrame {
 
 					Mesa_Reservada mesareservada = new Mesa_Reservada();
 					mesareservada.setVisible(true);
-					System.out.println(date);
 					dispose();
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();

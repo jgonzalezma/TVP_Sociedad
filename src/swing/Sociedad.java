@@ -104,11 +104,11 @@ public class Sociedad extends JFrame {
 			tipo = "refresco";
 			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = '" +tipo+"'");
 			while(rs.next()) {
-				String nombre = rs.getString("nombre");
+				nombre = rs.getString("nombre");
 				JButton btnNewButton = new JButton(nombre);
-				String precio = rs.getString("precio");
-				int cantidadDisponible = rs.getInt("cantidad_disponible");
-				int id = rs.getInt("id");
+				precio = rs.getString("precio");
+				cantidadDisponible = rs.getInt("cantidad_disponible");
+				id = rs.getInt("id");
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Cantidad_Producto cantidadProducto;
