@@ -310,10 +310,15 @@ public class Cantidad_Producto extends JFrame {
 			
 			Statement st = conexion.createStatement();
 			String tipo = Sociedad.tipo;
+			System.out.println(tipo);
 			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = '"+tipo+"'");
 			
-			txtfield_precio.setText(Double.toString(res) + "€");
-			txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
+			while(rs.next()) {
+				txtfield_precio.setText(Double.toString(res) + "€");
+				txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
+				lblProducto.setText(nombre);
+			}
+			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
