@@ -22,16 +22,21 @@ import java.awt.SystemColor;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class Sociedad extends JFrame {
 
 	private JPanel contentPane;
-	static String tipo, nombre, precio;
-	static int cantidadDisponible, id;
+	private String tipo = null, nombre, precio;
+	private int cantidadDisponible, id, nuevoid;
 	private JTextField txtfield_cantidadDisponible;
 	private JTextField txtfield_cantidad;
 	private JTextField txtfield_precio;
+	private JLabel lblProducto;
+	private JButton btt_1, btt_2, btt_3, btt_4, btt_5, btt_6, btt_7, btt_8, btt_9, btt_0, btt_borrar, btnPagar, btnSalir;
+	private ResultSet rs1, rs2, rs3;
 
 	/**
 	 * Launch the application.
@@ -120,6 +125,7 @@ public class Sociedad extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		txtfield_cantidad = new JTextField();
+		txtfield_cantidad.setEditable(false);
 		txtfield_cantidad.setColumns(10);
 		txtfield_cantidad.setBounds(559, 35, 46, 31);
 		contentPane.add(txtfield_cantidad);
@@ -139,7 +145,22 @@ public class Sociedad extends JFrame {
 		contentPane.add(panelGestion);
 		panelGestion.setLayout(null);
 		
-		JButton btt_7 = new JButton("7");
+		btt_7 = new JButton("7");
+		btt_7.setEnabled(false);
+		btt_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btt_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				anadirNumero(7);
@@ -148,7 +169,22 @@ public class Sociedad extends JFrame {
 		btt_7.setBounds(88, 90, 50, 50);
 		panelGestion.add(btt_7);
 		
-		JButton btt_8 = new JButton("8");
+		btt_8 = new JButton("8");
+		btt_8.setEnabled(false);
+		btt_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btt_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(8);
@@ -157,7 +193,22 @@ public class Sociedad extends JFrame {
 		btt_8.setBounds(148, 90, 50, 50);
 		panelGestion.add(btt_8);
 		
-		JButton btt_9 = new JButton("9");
+		btt_9 = new JButton("9");
+		btt_9.setEnabled(false);
+		btt_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btt_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(9);
@@ -166,7 +217,22 @@ public class Sociedad extends JFrame {
 		btt_9.setBounds(208, 90, 50, 50);
 		panelGestion.add(btt_9);
 		
-		JButton btt_4 = new JButton("4");
+		btt_4 = new JButton("4");
+		btt_4.setEnabled(false);
+		btt_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btt_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(4);
@@ -175,7 +241,22 @@ public class Sociedad extends JFrame {
 		btt_4.setBounds(88, 151, 50, 50);
 		panelGestion.add(btt_4);
 		
-		JButton btt_5 = new JButton("5");
+		btt_5 = new JButton("5");
+		btt_5.setEnabled(false);
+		btt_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btt_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(5);
@@ -184,7 +265,22 @@ public class Sociedad extends JFrame {
 		btt_5.setBounds(148, 151, 50, 50);
 		panelGestion.add(btt_5);
 		
-		JButton btt_6 = new JButton("6");
+		btt_6 = new JButton("6");
+		btt_6.setEnabled(false);
+		btt_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btt_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(6);
@@ -193,7 +289,22 @@ public class Sociedad extends JFrame {
 		btt_6.setBounds(208, 151, 50, 50);
 		panelGestion.add(btt_6);
 		
-		JButton btt_1 = new JButton("1");
+		btt_1 = new JButton("1");
+		btt_1.setEnabled(false);
+		btt_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btt_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(1);
@@ -202,7 +313,22 @@ public class Sociedad extends JFrame {
 		btt_1.setBounds(88, 212, 50, 50);
 		panelGestion.add(btt_1);
 		
-		JButton btt_2 = new JButton("2");
+		btt_2 = new JButton("2");
+		btt_2.setEnabled(false);
+		btt_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btt_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(2);
@@ -211,7 +337,22 @@ public class Sociedad extends JFrame {
 		btt_2.setBounds(148, 212, 50, 50);
 		panelGestion.add(btt_2);
 		
-		JButton btt_3 = new JButton("3");
+		btt_3 = new JButton("3");
+		btt_3.setEnabled(false);
+		btt_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btt_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(3);
@@ -220,7 +361,22 @@ public class Sociedad extends JFrame {
 		btt_3.setBounds(208, 212, 50, 50);
 		panelGestion.add(btt_3);
 		
-		JButton btt_0 = new JButton("0");
+		btt_0 = new JButton("0");
+		btt_0.setEnabled(false);
+		btt_0.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					actualizar();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		btt_0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anadirNumero(0);
@@ -229,7 +385,9 @@ public class Sociedad extends JFrame {
 		btt_0.setBounds(88, 273, 50, 50);
 		panelGestion.add(btt_0);
 		
-		JButton btt_borrar = new JButton("<---");
+		btt_borrar = new JButton("<---");
+		btt_borrar.setEnabled(false);
+
 		btt_borrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int length = txtfield_cantidad.getText().length();
@@ -241,18 +399,27 @@ public class Sociedad extends JFrame {
 					back.deleteCharAt(number);
 					store = back.toString();
 					txtfield_cantidad.setText(store);
-					//actualizar();
+					try {
+						actualizar();
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
 		btt_borrar.setBounds(148, 273, 110, 50);
 		panelGestion.add(btt_borrar);
 		
-		JButton btnPagar = new JButton("Pagar");
+		btnPagar = new JButton("Pagar");
+		btnPagar.setEnabled(false);
 		btnPagar.setBounds(30, 373, 128, 50);
 		panelGestion.add(btnPagar);
 		
-		JButton btnSalir = new JButton("Cerrar");
+		btnSalir = new JButton("Cerrar");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -261,7 +428,7 @@ public class Sociedad extends JFrame {
 		btnSalir.setBounds(168, 373, 128, 50);
 		panelGestion.add(btnSalir);
 		
-		JLabel lblProducto = new JLabel("");
+		lblProducto = new JLabel("");
 		lblProducto.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblProducto.setBounds(88, 434, 170, 14);
 		panelGestion.add(lblProducto);
@@ -269,19 +436,22 @@ public class Sociedad extends JFrame {
 		try {
 			Statement st = conexion.createStatement();
 			tipo = "refresco";
-			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = '" +tipo+"'");
-			while(rs.next()) {
-				String nombre = rs.getString("nombre");
+			rs1 = st.executeQuery("SELECT * from productos WHERE tipo = '" +tipo+"'");
+			while(rs1.next()) {
+				String nombre = rs1.getString("nombre");
 				JButton btnNewButton = new JButton(nombre);
-				String precio = rs.getString("precio");
-				int cantidadDisponible = rs.getInt("cantidad_disponible");
-				int id = rs.getInt("id");
+				String precio = rs1.getString("precio");
+				int cantidadDisponible = rs1.getInt("cantidad_disponible");
+				int id = rs1.getInt("id");
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
 						txtfield_precio.setText(precio + "€");
 						lblProducto.setText(nombre);
-						System.out.println(id);		
+						tipo = "refresco";
+						botonesEnabled();
+						System.out.println(id);
+						nuevoid = id;
 					}
 				});
 				panel_refrescos.add(btnNewButton);
@@ -293,19 +463,22 @@ public class Sociedad extends JFrame {
 		try {
 			Statement st = conexion.createStatement();
 			tipo = "bebida_alcoholica";
-			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = '" +tipo+"'");
-			while(rs.next()) {
-				String nombre = rs.getString("nombre");
-				JButton btnNewButton = new JButton(rs.getString("nombre"));
-				String precio = rs.getString("precio");
-				int cantidadDisponible = rs.getInt("cantidad_disponible");
-				int id = rs.getInt("id");
+			rs2 = st.executeQuery("SELECT * from productos WHERE tipo = '" +tipo+"'");
+			while(rs2.next()) {
+				String nombre = rs2.getString("nombre");
+				JButton btnNewButton = new JButton(rs2.getString("nombre"));
+				String precio = rs2.getString("precio");
+				int cantidadDisponible = rs2.getInt("cantidad_disponible");
+				int id = rs2.getInt("id");
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
 						txtfield_precio.setText(precio + "€");
 						lblProducto.setText(nombre);
+						tipo = "bebida_alcoholica";
+						botonesEnabled();
 						System.out.println(id);
+						nuevoid = id;
 					}
 				});
 				panel_bebidas.add(btnNewButton);
@@ -317,19 +490,22 @@ public class Sociedad extends JFrame {
 		try {
 			Statement st = conexion.createStatement();
 			tipo = "tabaco";
-			ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = '" +tipo+"'");
-			while(rs.next()) {
-				String nombre = rs.getString("nombre");
+			rs3 = st.executeQuery("SELECT * from productos WHERE tipo = '" +tipo+"'");
+			while(rs3.next()) {
+				String nombre = rs3.getString("nombre");
 				JButton btnNewButton = new JButton(nombre);
-				String precio = rs.getString("precio");
-				int cantidadDisponible = rs.getInt("cantidad_disponible");
-				int id = rs.getInt("id");
+				String precio = rs3.getString("precio");
+				int cantidadDisponible = rs3.getInt("cantidad_disponible");
+				int id = rs3.getInt("id");
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
 						txtfield_precio.setText(precio + "€");
 						lblProducto.setText(nombre);
-						System.out.println(id);			
+						tipo = "tabaco";
+						botonesEnabled();
+						System.out.println(id);
+						nuevoid = id;
 					}
 				});
 				panel_tabaco.add(btnNewButton);
@@ -347,32 +523,43 @@ public class Sociedad extends JFrame {
 		txtfield_cantidad.setText(txtfield_cantidad.getText() + num);		
 	}
 	
+	//Función para actualizar el precio del producto clickado
 	public void actualizar() throws ClassNotFoundException, SQLException {
-		// Conexion a base de datos
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection conexion = null;
-		conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
-		
-		Statement st = conexion.createStatement();
-		String tipo = Sociedad.tipo;
-		ResultSet rs = st.executeQuery("SELECT * from productos WHERE tipo = '"+tipo+"'");
-		try {
-			while(rs.next()) {
-			int id = Sociedad.id;
-			String nombre = rs.getString("nombre");
-			String precio = rs.getString("precio");
-			//lblProducto.setText(nombre);
-			int cantidadDisponible = rs.getInt("cantidad_disponible");
+		System.out.println(tipo);
+		if(tipo == "refresco") {
 			String cantidad = txtfield_cantidad.getText();
-			int c = Integer.parseInt(cantidad);
+			System.out.println(cantidad);
+			nombre = lblProducto.getText();
+			System.out.println(nombre);
 			double p = Double.parseDouble(precio);
-			double res = (double) (p * c);
-			txtfield_precio.setText(Double.toString(res) + "€");
+			double c = Double.parseDouble(cantidad);
+			System.out.println("cantidad: " + c);
+			System.out.println("precio: " + p);
+			//double res = p*c;
+			//System.out.println(p + "*" + c + "=" + p*c);
+			//txtfield_precio.setText(Double.toString(res) + "€");
 			txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
-			System.out.println(id);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(nuevoid);
+		}else if (tipo == "bebida_alcoholica") {
+			// TODO bebidas alcoholicas
+		}else {
+			// TODO tabaco
 		}
+	}
+	
+	//Funcion para activar todos los botones, al hacer click en cualquier producto se llamará a esta función
+	public void botonesEnabled() {
+		btt_0.setEnabled(true);
+		btt_1.setEnabled(true);
+		btt_2.setEnabled(true);
+		btt_3.setEnabled(true);
+		btt_4.setEnabled(true);
+		btt_5.setEnabled(true);
+		btt_6.setEnabled(true);
+		btt_7.setEnabled(true);
+		btt_8.setEnabled(true);
+		btt_9.setEnabled(true);
+		btnPagar.setEnabled(true);
+		btt_borrar.setEnabled(true);
 	}
 }
