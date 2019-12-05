@@ -56,6 +56,7 @@ public class Reserva extends JFrame {
 		setBounds(100, 100, 300, 250);
 		panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(new BorderLayout(0, 0));
 		setContentPane(panel);
 
 		// Instanciar Componente
@@ -63,10 +64,8 @@ public class Reserva extends JFrame {
 
 		// Ubicar y agregar al panel
 		dateChooser.setBounds(0, 0, 50, 50);
-		panel.setLayout(null);
 
 		JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
-		dateChooser.setBounds(5, 5, 274, 201);
 
 		panel.add(dateChooser);
 
