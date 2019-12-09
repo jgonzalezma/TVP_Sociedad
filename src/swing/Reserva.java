@@ -28,9 +28,14 @@ import javax.swing.JComboBox;
 
 public class Reserva extends JFrame {
 
-	private JPanel panel;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel panel, panel_hora;
 	private JDateChooser dateChooser;
 	public static JComboBox<String> comboBox = new JComboBox<String>();
+	private JComboBox<String> comboBoxHora;
 
 	/**
 	 * Launch the application.
@@ -104,18 +109,21 @@ public class Reserva extends JFrame {
 					Class.forName("com.mysql.jdbc.Driver");
 					Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad", "root", "");
 					PreparedStatement pst = conexion
-							.prepareStatement("INSERT INTO reservas (id_usuario, fecha, mesa) values (?,?,?)");
+							.prepareStatement("INSERT INTO reservas (id_usuario, fecha, hora, mesa) values (?,?,?,?)");
 
 					Mesa mesa = new Mesa();
 
 					mesa.setId_usuario(Login.username);
 					mesa.setFecha((java.sql.Date) fechaparsed);
 					String m = (String) comboBox.getSelectedItem();
+					String hora = (String) comboBoxHora.getSelectedItem();
 					mesa.setNombre(m);
+					mesa.setHora(hora);
 
 					pst.setString(1, mesa.getId_usuario());
 					pst.setDate(2, new java.sql.Date(mesa.getFecha().getTime()));
-					pst.setString(3, mesa.getNombre());
+					pst.setString(3, mesa.getHora());
+					pst.setString(4, mesa.getNombre());
 					pst.execute();
 
 					Mesa_Reservada mesareservada = new Mesa_Reservada();
@@ -129,6 +137,20 @@ public class Reserva extends JFrame {
 			}
 		});
 		dateChooser.add(btnReservar, BorderLayout.SOUTH);
+		
+		panel_hora = new JPanel();
+		panel.add(panel_hora, BorderLayout.SOUTH);
+		
+		JLabel lbl_hora = new JLabel("Hora: ");
+		panel_hora.add(lbl_hora);
+		
+		comboBoxHora = new JComboBox<String>();
+		comboBoxHora.addItem("12:00");
+		comboBoxHora.addItem("13:00");
+		comboBoxHora.addItem("14:00");
+		comboBoxHora.addItem("15:00");
+		panel_hora.add(comboBoxHora);
+		
 	}
 
 }

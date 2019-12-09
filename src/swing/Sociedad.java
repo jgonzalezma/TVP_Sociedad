@@ -28,9 +28,13 @@ import java.awt.event.MouseEvent;
 
 public class Sociedad extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private String tipo = null, precio, nuevoprecio;
-	private int cantidadDisponible, nuevaCantidadDisponible, id, nuevoid;
+	private String tipo = null, nuevoprecio;
+	private int nuevaCantidadDisponible;
 	private JTextField txtfield_cantidadDisponible;
 	private JTextField txtfield_cantidad;
 	private JTextField txtfield_precio;
@@ -153,10 +157,8 @@ public class Sociedad extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -177,10 +179,8 @@ public class Sociedad extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -201,10 +201,8 @@ public class Sociedad extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -225,10 +223,8 @@ public class Sociedad extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -249,10 +245,8 @@ public class Sociedad extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -273,10 +267,8 @@ public class Sociedad extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -297,10 +289,8 @@ public class Sociedad extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -321,10 +311,8 @@ public class Sociedad extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -345,10 +333,8 @@ public class Sociedad extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -369,10 +355,8 @@ public class Sociedad extends JFrame {
 				try {
 					actualizar();
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -402,10 +386,8 @@ public class Sociedad extends JFrame {
 					try {
 						actualizar();
 					} catch (ClassNotFoundException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -442,7 +424,7 @@ public class Sociedad extends JFrame {
 				JButton btnNewButton = new JButton(nombre);
 				String precio = rs1.getString("precio");
 				int cantidadDisponible = rs1.getInt("cantidad_disponible");
-				int id = rs1.getInt("id");
+				rs1.getInt("id");
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
@@ -450,7 +432,6 @@ public class Sociedad extends JFrame {
 						lblProducto.setText(nombre);
 						tipo = "refresco";
 						botonesEnabled();
-						nuevoid = id;
 						nuevoprecio = precio;
 						nuevaCantidadDisponible = cantidadDisponible;
 					}
@@ -470,7 +451,7 @@ public class Sociedad extends JFrame {
 				JButton btnNewButton = new JButton(rs2.getString("nombre"));
 				String precio = rs2.getString("precio");
 				int cantidadDisponible = rs2.getInt("cantidad_disponible");
-				int id = rs2.getInt("id");
+				rs2.getInt("id");
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
@@ -478,7 +459,6 @@ public class Sociedad extends JFrame {
 						lblProducto.setText(nombre);
 						tipo = "bebida_alcoholica";
 						botonesEnabled();
-						nuevoid = id;
 						nuevoprecio = precio;
 						nuevaCantidadDisponible = cantidadDisponible;
 					}
@@ -498,7 +478,7 @@ public class Sociedad extends JFrame {
 				JButton btnNewButton = new JButton(nombre);
 				String precio = rs3.getString("precio");
 				int cantidadDisponible = rs3.getInt("cantidad_disponible");
-				int id = rs3.getInt("id");
+				rs3.getInt("id");
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
@@ -506,7 +486,6 @@ public class Sociedad extends JFrame {
 						lblProducto.setText(nombre);
 						tipo = "tabaco";
 						botonesEnabled();
-						nuevoid = id;
 						nuevoprecio = precio;
 						nuevaCantidadDisponible = cantidadDisponible;
 					}
@@ -530,7 +509,6 @@ public class Sociedad extends JFrame {
 	public void actualizar() throws ClassNotFoundException, SQLException {
 		if(tipo == "refresco" || tipo == "bebida_alcoholica" || tipo == "tabaco") {
 			String cantidad = txtfield_cantidad.getText();
-			String nombre = lblProducto.getText();
 			Double p = Double.parseDouble(nuevoprecio);
 			Double c = Double.parseDouble(cantidad);
 			Double res = p*c;
@@ -538,7 +516,7 @@ public class Sociedad extends JFrame {
 			txtfield_precio.setText(Double.toString(roundRes) + "€");
 			txtfield_cantidadDisponible.setText(Integer.toString(nuevaCantidadDisponible));
 		}else {
-			// TODO tabaco
+
 		}
 	}
 	

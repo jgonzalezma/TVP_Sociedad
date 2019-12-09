@@ -25,6 +25,10 @@ import java.awt.Font;
 
 public class Login extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtfield_user;
 	private JTextField txtfield_password;

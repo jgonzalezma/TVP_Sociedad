@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-11-2019 a las 11:44:28
+-- Tiempo de generación: 09-12-2019 a las 10:52:32
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `mesa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `nombre` (`nombre`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=5 ;
 
 --
@@ -55,19 +56,19 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `cantidad_disponible` int(11) NOT NULL,
   `precio` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `tipo`, `cantidad_disponible`, `precio`) VALUES
-(1, 'coca cola', 'refresco', 30, 1),
 (2, 'fanta naranja', 'refresco', 25, 1.2),
 (3, 'vino', 'bebida_alcoholica', 20, 3.5),
 (4, 'cerveza', 'bebida_alcoholica', 27, 1.8),
 (5, 'tabaco a', 'tabaco', 8, 5.5),
-(6, 'tabaco b', 'tabaco', 7, 6.3);
+(6, 'tabaco b', 'tabaco', 7, 6.3),
+(7, 'Coca cola', 'refresco', 40, 1.05);
 
 -- --------------------------------------------------------
 
@@ -79,17 +80,21 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
-  `mesa` int(11) DEFAULT NULL,
+  `hora` varchar(5) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `mesa` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `mesa` (`mesa`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+  KEY `mesa` (`mesa`),
+  KEY `hora` (`hora`),
+  KEY `hora_2` (`hora`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `reservas`
 --
 
-INSERT INTO `reservas` (`id`, `id_usuario`, `fecha`, `mesa`) VALUES
-(2, 111, '2019-11-23', NULL);
+INSERT INTO `reservas` (`id`, `id_usuario`, `fecha`, `hora`, `mesa`) VALUES
+(13, 1, '2019-12-20', '14:00', 'mesa 1'),
+(14, 1, '2019-12-13', '13:00', 'mesa 1');
 
 -- --------------------------------------------------------
 
@@ -121,7 +126,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `num_usuario`, `pass_usuario`) VALUES
 -- Filtros para la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`mesa`) REFERENCES `mesa` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`mesa`) REFERENCES `mesa` (`nombre`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

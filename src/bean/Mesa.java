@@ -6,6 +6,7 @@ public class Mesa {
 	private int id;
 	private String id_usuario;
 	private Date fecha;
+	private String hora;
 	private String nombre;
 	
 	public int getId() {
@@ -31,6 +32,12 @@ public class Mesa {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public String getHora() {
+		return hora;
+	}
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 	
 }
