@@ -379,11 +379,11 @@ public class Sociedad extends JFrame {
 				String store;
 				
 				if(length > 0) {
-					StringBuilder back = new StringBuilder(txtfield_cantidad.getText());
-					back.deleteCharAt(number);
-					store = back.toString();
-					txtfield_cantidad.setText(store);
 					try {
+						StringBuilder back = new StringBuilder(txtfield_cantidad.getText());
+						back.deleteCharAt(number);
+						store = back.toString();
+						txtfield_cantidad.setText(store);
 						actualizar();
 					} catch (ClassNotFoundException e1) {
 						e1.printStackTrace();
