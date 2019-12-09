@@ -30,7 +30,7 @@ public class Sociedad extends JFrame {
 
 	private JPanel contentPane;
 	private String tipo = null, precio, nuevoprecio;
-	private int cantidadDisponible, id, nuevoid;
+	private int cantidadDisponible, nuevaCantidadDisponible, id, nuevoid;
 	private JTextField txtfield_cantidadDisponible;
 	private JTextField txtfield_cantidad;
 	private JTextField txtfield_precio;
@@ -450,9 +450,9 @@ public class Sociedad extends JFrame {
 						lblProducto.setText(nombre);
 						tipo = "refresco";
 						botonesEnabled();
-						System.out.println(id);
 						nuevoid = id;
 						nuevoprecio = precio;
+						nuevaCantidadDisponible = cantidadDisponible;
 					}
 				});
 				panel_refrescos.add(btnNewButton);
@@ -478,9 +478,9 @@ public class Sociedad extends JFrame {
 						lblProducto.setText(nombre);
 						tipo = "bebida_alcoholica";
 						botonesEnabled();
-						System.out.println(id);
 						nuevoid = id;
 						nuevoprecio = precio;
+						nuevaCantidadDisponible = cantidadDisponible;
 					}
 				});
 				panel_bebidas.add(btnNewButton);
@@ -506,9 +506,9 @@ public class Sociedad extends JFrame {
 						lblProducto.setText(nombre);
 						tipo = "tabaco";
 						botonesEnabled();
-						System.out.println(id);
 						nuevoid = id;
 						nuevoprecio = precio;
+						nuevaCantidadDisponible = cantidadDisponible;
 					}
 				});
 				panel_tabaco.add(btnNewButton);
@@ -530,13 +530,13 @@ public class Sociedad extends JFrame {
 	public void actualizar() throws ClassNotFoundException, SQLException {
 		if(tipo == "refresco" || tipo == "bebida_alcoholica" || tipo == "tabaco") {
 			String cantidad = txtfield_cantidad.getText();
-			System.out.println(nuevoprecio);
 			String nombre = lblProducto.getText();
 			Double p = Double.parseDouble(nuevoprecio);
 			Double c = Double.parseDouble(cantidad);
-			double res = p*c;
-			txtfield_precio.setText(Double.toString(res) + "€");
-			txtfield_cantidadDisponible.setText(Integer.toString(cantidadDisponible));
+			Double res = p*c;
+			Double roundRes = Math.round(res * 100.0) / 100.0;
+			txtfield_precio.setText(Double.toString(roundRes) + "€");
+			txtfield_cantidadDisponible.setText(Integer.toString(nuevaCantidadDisponible));
 		}else {
 			// TODO tabaco
 		}
