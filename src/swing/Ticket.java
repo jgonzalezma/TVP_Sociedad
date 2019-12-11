@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
@@ -19,6 +20,7 @@ public class Ticket extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	JButton btnSi;
 
 	/**
 	 * Launch the application.
@@ -38,6 +40,8 @@ public class Ticket extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 	public Ticket() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,13 +57,8 @@ public class Ticket extends JFrame {
 		lblQuieresImprimirUn.setBounds(115, 26, 206, 20);
 		contentPane.add(lblQuieresImprimirUn);
 		
-		JButton btnSi = new JButton("SI");
+		btnSi = new JButton("SI");
 		btnSi.setBackground(new Color(0, 255, 0));
-		btnSi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
 		btnSi.setBounds(54, 121, 113, 41);
 		contentPane.add(btnSi);
 		

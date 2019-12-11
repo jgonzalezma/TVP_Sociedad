@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -33,8 +34,8 @@ public class Sociedad extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private String tipo = null, nuevoprecio;
-	private int nuevaCantidadDisponible;
+	private String tipo = null, nuevoprecio, nom;
+	private static int nuevaCantidadDisponible, cantidad;
 	private Double res;
 	private JTextField txtfield_cantidadDisponible;
 	private JTextField txtfield_cantidad;
@@ -386,6 +387,7 @@ public class Sociedad extends JFrame {
 						back.deleteCharAt(number);
 						store = back.toString();
 						txtfield_cantidad.setText(store);
+						cantidad = Integer.parseInt(txtfield_cantidad.getText());
 						actualizar();
 					} catch (ClassNotFoundException e1) {
 						e1.printStackTrace();
@@ -401,9 +403,31 @@ public class Sociedad extends JFrame {
 		btnPagar = new JButton("Pagar");
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Ticket ticket = new Ticket();
+				Ticket ticket;
+				ticket = new Ticket();
 				ticket.setVisible(true);
-				System.out.println();
+				System.out.println(cantidad);
+				System.out.println(nom);
+				
+				//Esto se ejecutará al hacer click en el botón "si" en la ventana de impresión del ticket
+				ticket.btnSi.addActionListener(new ActionListener() {	
+					@Override
+					public void actionPerformed(ActionEvent e) {
+							try {
+								Class.forName("com.mysql.jdbc.Driver");
+								Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
+								String sql = "UPDATE productos SET cantidad_disponible = cantidad_disponible - '"+cantidad+"' WHERE nombre = '"+nom+"';";
+								System.out.println(sql);
+								PreparedStatement pst = conexion.prepareStatement(sql);
+								boolean rs = pst.execute();
+								rs = true;
+							} catch (SQLException e1) {
+								e1.printStackTrace();
+							} catch (ClassNotFoundException e1) {
+								e1.printStackTrace();
+							}	
+					}
+				});
 			}
 		});
 		btnPagar.setEnabled(false);
@@ -443,6 +467,7 @@ public class Sociedad extends JFrame {
 						botonesEnabled();
 						nuevoprecio = precio;
 						nuevaCantidadDisponible = cantidadDisponible;
+						nom = nombre;
 					}
 				});
 				panel_refrescos.add(btnNewButton);
@@ -470,6 +495,7 @@ public class Sociedad extends JFrame {
 						botonesEnabled();
 						nuevoprecio = precio;
 						nuevaCantidadDisponible = cantidadDisponible;
+						nom = nombre;
 					}
 				});
 				panel_bebidas.add(btnNewButton);
@@ -497,6 +523,7 @@ public class Sociedad extends JFrame {
 						botonesEnabled();
 						nuevoprecio = precio;
 						nuevaCantidadDisponible = cantidadDisponible;
+						nom = nombre;
 					}
 				});
 				panel_tabaco.add(btnNewButton);
@@ -511,7 +538,8 @@ public class Sociedad extends JFrame {
 	}
 	
 	public void anadirNumero(int num) {
-		txtfield_cantidad.setText(txtfield_cantidad.getText() + num);		
+		txtfield_cantidad.setText(txtfield_cantidad.getText() + num);
+		cantidad = Integer.parseInt(txtfield_cantidad.getText());
 	}
 	
 	//Función para actualizar el precio del producto clickado
