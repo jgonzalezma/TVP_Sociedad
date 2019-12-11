@@ -408,6 +408,7 @@ public class Sociedad extends JFrame {
 				ticket.setVisible(true);
 				System.out.println(cantidad);
 				System.out.println(nom);
+				System.out.println(nuevoprecio);
 				
 				//Esto se ejecutará al hacer click en el botón "si" en la ventana de impresión del ticket
 				ticket.btnSi.addActionListener(new ActionListener() {	
@@ -416,16 +417,21 @@ public class Sociedad extends JFrame {
 							try {
 								Class.forName("com.mysql.jdbc.Driver");
 								Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
-								String sql = "UPDATE productos SET cantidad_disponible = cantidad_disponible - '"+cantidad+"' WHERE nombre = '"+nom+"';";
+								String sql = "UPDATE productos SET cantidad_disponible = cantidad_disponible - "+cantidad+" WHERE nombre = '"+nom+"';";
 								System.out.println(sql);
 								PreparedStatement pst = conexion.prepareStatement(sql);
 								boolean rs = pst.execute();
 								rs = true;
+								//dispose();
+								TicketFinal ticketFinal = new TicketFinal();
+								ticketFinal.setVisible(true);
+								ticketFinal.txtField_nombre.setText(nom);
+								ticketFinal.txtField_precio.setText(res + "€");							
 							} catch (SQLException e1) {
 								e1.printStackTrace();
 							} catch (ClassNotFoundException e1) {
 								e1.printStackTrace();
-							}	
+							}
 					}
 				});
 			}
@@ -468,6 +474,7 @@ public class Sociedad extends JFrame {
 						nuevoprecio = precio;
 						nuevaCantidadDisponible = cantidadDisponible;
 						nom = nombre;
+						cantidad = 1;
 					}
 				});
 				panel_refrescos.add(btnNewButton);
@@ -496,6 +503,7 @@ public class Sociedad extends JFrame {
 						nuevoprecio = precio;
 						nuevaCantidadDisponible = cantidadDisponible;
 						nom = nombre;
+						cantidad = 1;
 					}
 				});
 				panel_bebidas.add(btnNewButton);
@@ -524,6 +532,7 @@ public class Sociedad extends JFrame {
 						nuevoprecio = precio;
 						nuevaCantidadDisponible = cantidadDisponible;
 						nom = nombre;
+						cantidad = 1;
 					}
 				});
 				panel_tabaco.add(btnNewButton);
