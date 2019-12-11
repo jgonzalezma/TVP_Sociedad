@@ -454,6 +454,7 @@ public class Sociedad extends JFrame {
 		lblProducto.setBounds(88, 434, 170, 14);
 		panelGestion.add(lblProducto);
 		
+		//Select de refrescos
 		try {
 			Statement st = conexion.createStatement();
 			tipo = "refresco";
@@ -483,6 +484,7 @@ public class Sociedad extends JFrame {
 			e.printStackTrace();
 		}
 		
+		//Select de bebidas alcoholicas
 		try {
 			Statement st = conexion.createStatement();
 			tipo = "bebida_alcoholica";
@@ -512,6 +514,7 @@ public class Sociedad extends JFrame {
 			e.printStackTrace();
 		}
 		
+		//Select de tabacos
 		try {
 			Statement st = conexion.createStatement();
 			tipo = "tabaco";
