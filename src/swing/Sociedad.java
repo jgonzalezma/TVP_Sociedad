@@ -35,6 +35,7 @@ public class Sociedad extends JFrame {
 	private JPanel contentPane;
 	private String tipo = null, nuevoprecio;
 	private int nuevaCantidadDisponible;
+	private Double res;
 	private JTextField txtfield_cantidadDisponible;
 	private JTextField txtfield_cantidad;
 	private JTextField txtfield_precio;
@@ -129,6 +130,7 @@ public class Sociedad extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		txtfield_cantidad = new JTextField();
+		txtfield_cantidad.setText("1");
 		txtfield_cantidad.setEditable(false);
 		txtfield_cantidad.setColumns(10);
 		txtfield_cantidad.setBounds(559, 35, 46, 31);
@@ -397,6 +399,13 @@ public class Sociedad extends JFrame {
 		panelGestion.add(btt_borrar);
 		
 		btnPagar = new JButton("Pagar");
+		btnPagar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Ticket ticket = new Ticket();
+				ticket.setVisible(true);
+				System.out.println();
+			}
+		});
 		btnPagar.setEnabled(false);
 		btnPagar.setBounds(30, 373, 128, 50);
 		panelGestion.add(btnPagar);
@@ -507,16 +516,20 @@ public class Sociedad extends JFrame {
 	
 	//Función para actualizar el precio del producto clickado
 	public void actualizar() throws ClassNotFoundException, SQLException {
-		if(tipo == "refresco" || tipo == "bebida_alcoholica" || tipo == "tabaco") {
-			String cantidad = txtfield_cantidad.getText();
-			Double p = Double.parseDouble(nuevoprecio);
-			Double c = Double.parseDouble(cantidad);
-			Double res = p*c;
-			Double roundRes = Math.round(res * 100.0) / 100.0;
-			txtfield_precio.setText(Double.toString(roundRes) + "€");
-			txtfield_cantidadDisponible.setText(Integer.toString(nuevaCantidadDisponible));
-		}else {
-
+		try {
+			if(tipo == "refresco" || tipo == "bebida_alcoholica" || tipo == "tabaco") {
+				String cantidad = txtfield_cantidad.getText();
+				Double p = Double.parseDouble(nuevoprecio);
+				Double c = Double.parseDouble(cantidad);
+				res = p*c;
+				Double roundRes = Math.round(res * 100.0) / 100.0;
+				txtfield_precio.setText(Double.toString(roundRes) + "€");
+				txtfield_cantidadDisponible.setText(Integer.toString(nuevaCantidadDisponible));
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("Cantidad está a 0");
+			txtfield_cantidad.setText("1");
+			e.printStackTrace();
 		}
 	}
 	
