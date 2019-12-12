@@ -12,6 +12,9 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import bean.Gasto;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
@@ -417,18 +420,30 @@ public class Sociedad extends JFrame {
 							try {
 								Class.forName("com.mysql.jdbc.Driver");
 								Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
-								String sql = "UPDATE productos SET cantidad_disponible = cantidad_disponible - "+cantidad+" WHERE nombre = '"+nom+"';";
-								System.out.println(sql);
-								PreparedStatement pst = conexion.prepareStatement(sql);
-								boolean rs = pst.execute();
+								//La sql1 resta la cantidad comprada al producto en la bd
+								//La sql2 añade a la entidad "gastos" en la bd la cantidad gastada en el producto, para luego hacer un seguimiento de los gastos
+								String sql1 = "UPDATE productos SET cantidad_disponible = cantidad_disponible - "+cantidad+" WHERE nombre = '"+nom+"';";
+								String sql2 = "INSERT INTO gastos (id_usuario, gasto) values (?,?)";
+
+								PreparedStatement pst1 = conexion.prepareStatement(sql1);
+								boolean rs = pst1.execute();
 								rs = true;
-								//dispose();
+
 								TicketFinal ticketFinal = new TicketFinal();
 								ticketFinal.setVisible(true);
 								ticketFinal.txtField_producto.setText(nom);						
 								ticketFinal.txtField_precio.setText(roundRes.toString() + "€");
 								String cant = Integer.toString(cantidad);
 								ticketFinal.txtField_cantidad.setText(cant);
+								
+								PreparedStatement pst2 = conexion.prepareStatement(sql2);
+								Gasto gasto = new Gasto();
+								gasto.setId_usuario(Login.username);
+								gasto.setCantidad(roundRes);
+								
+								pst2.setString(1, gasto.getId_usuario());
+								pst2.setDouble(2, gasto.getCantidad());
+								pst2.execute();
 							} catch (SQLException e1) {
 								e1.printStackTrace();
 							} catch (ClassNotFoundException e1) {
