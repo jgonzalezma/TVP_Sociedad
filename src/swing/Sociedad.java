@@ -35,8 +35,8 @@ public class Sociedad extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String tipo = null, nuevoprecio, nom;
-	private static int nuevaCantidadDisponible, cantidad;
-	private Double res;
+	private int nuevaCantidadDisponible, cantidad;
+	private Double res, roundRes;
 	private JTextField txtfield_cantidadDisponible;
 	private JTextField txtfield_cantidad;
 	private JTextField txtfield_precio;
@@ -425,8 +425,10 @@ public class Sociedad extends JFrame {
 								//dispose();
 								TicketFinal ticketFinal = new TicketFinal();
 								ticketFinal.setVisible(true);
-								ticketFinal.txtField_nombre.setText(nom);
-								ticketFinal.txtField_precio.setText(res + "€");							
+								ticketFinal.txtField_producto.setText(nom);						
+								ticketFinal.txtField_precio.setText(roundRes.toString() + "€");
+								String cant = Integer.toString(cantidad);
+								ticketFinal.txtField_cantidad.setText(cant);
 							} catch (SQLException e1) {
 								e1.printStackTrace();
 							} catch (ClassNotFoundException e1) {
@@ -558,11 +560,11 @@ public class Sociedad extends JFrame {
 	public void actualizar() throws ClassNotFoundException, SQLException {
 		try {
 			if(tipo == "refresco" || tipo == "bebida_alcoholica" || tipo == "tabaco") {
-				String cantidad = txtfield_cantidad.getText();
+				String cant = txtfield_cantidad.getText();
 				Double p = Double.parseDouble(nuevoprecio);
-				Double c = Double.parseDouble(cantidad);
+				Double c = Double.parseDouble(cant);
 				res = p*c;
-				Double roundRes = Math.round(res * 100.0) / 100.0;
+				roundRes = Math.round(res * 100.0) / 100.0;
 				txtfield_precio.setText(Double.toString(roundRes) + "€");
 				txtfield_cantidadDisponible.setText(Integer.toString(nuevaCantidadDisponible));
 			}

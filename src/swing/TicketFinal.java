@@ -1,20 +1,29 @@
 package swing;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
 
-public class TicketFinal extends JFrame{
+import java.awt.Font;
+import java.sql.SQLException;
+
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class TicketFinal extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JFrame frame;
-	public JTextField txtField_cantidad, txtField_nombre, txtField_precio;
+	private JPanel contentPane;
+	public JTextField txtField_producto, txtField_cantidad, txtField_precio;
 
 	/**
 	 * Launch the application.
@@ -23,8 +32,8 @@ public class TicketFinal extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TicketFinal window = new TicketFinal();
-					window.frame.setVisible(true);
+					TicketFinal frame = new TicketFinal();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -33,51 +42,61 @@ public class TicketFinal extends JFrame{
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 	public TicketFinal() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 204, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		JLabel lblTicketDeLa = new JLabel("Ticket de la compra:");
-		lblTicketDeLa.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 16));
-		lblTicketDeLa.setBounds(155, 11, 159, 14);
-		frame.getContentPane().add(lblTicketDeLa);
-		
-		JLabel lblCantidadComprada = new JLabel("Cantidad comprada:");
-		lblCantidadComprada.setBounds(61, 106, 118, 14);
-		frame.getContentPane().add(lblCantidadComprada);
-		
-		txtField_cantidad = new JTextField();
-		txtField_cantidad.setBounds(185, 99, 52, 29);
-		frame.getContentPane().add(txtField_cantidad);
-		txtField_cantidad.setColumns(10);
-		
-		JLabel lblPrecio = new JLabel("Precio:");
-		lblPrecio.setBounds(61, 142, 46, 14);
-		frame.getContentPane().add(lblPrecio);
+		JLabel lbl_ticketFinal = new JLabel("Resumen del ticket");
+		lbl_ticketFinal.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_ticketFinal.setBounds(132, 24, 206, 20);
+		contentPane.add(lbl_ticketFinal);
 		
 		JLabel lblProducto = new JLabel("Producto:");
-		lblProducto.setBounds(61, 71, 88, 14);
-		frame.getContentPane().add(lblProducto);
+		lblProducto.setBounds(45, 75, 65, 20);
+		contentPane.add(lblProducto);
 		
-		txtField_nombre = new JTextField();
-		txtField_nombre.setColumns(10);
-		txtField_nombre.setBounds(186, 57, 128, 31);
-		frame.getContentPane().add(txtField_nombre);
+		JLabel lblCantidad = new JLabel("Cantidad:");
+		lblCantidad.setBounds(45, 106, 65, 14);
+		contentPane.add(lblCantidad);
+		
+		JLabel lblPrecio = new JLabel("Precio:");
+		lblPrecio.setBounds(45, 141, 65, 14);
+		contentPane.add(lblPrecio);
+		
+		txtField_producto = new JTextField();
+		txtField_producto.setEditable(false);
+		txtField_producto.setBounds(120, 75, 106, 20);
+		contentPane.add(txtField_producto);
+		txtField_producto.setColumns(10);
+		
+		txtField_cantidad = new JTextField();
+		txtField_cantidad.setEditable(false);
+		txtField_cantidad.setBounds(120, 103, 40, 30);
+		contentPane.add(txtField_cantidad);
+		txtField_cantidad.setColumns(10);
 		
 		txtField_precio = new JTextField();
+		txtField_precio.setEditable(false);
 		txtField_precio.setColumns(10);
-		txtField_precio.setBounds(185, 139, 52, 29);
-		frame.getContentPane().add(txtField_precio);
+		txtField_precio.setBounds(120, 138, 40, 30);
+		contentPane.add(txtField_precio);
+		
+		JButton btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnCerrar.setBounds(45, 197, 89, 23);
+		contentPane.add(btnCerrar);
 	}
 }
