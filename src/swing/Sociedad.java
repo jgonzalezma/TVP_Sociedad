@@ -419,10 +419,6 @@ public class Sociedad extends JFrame {
 				Ticket ticket;
 				ticket = new Ticket();
 				ticket.setVisible(true);
-				System.out.println(cantidad);
-				System.out.println(nom);
-				System.out.println(nuevoprecio);
-				
 				//Esto se ejecutará al hacer click en el botón "si" en la ventana de impresión del ticket
 				ticket.btnSi.addActionListener(new ActionListener() {	
 					@Override
@@ -442,7 +438,6 @@ public class Sociedad extends JFrame {
 								while (rss.next()){
 									//Se coge la cantidad disponible del producto y luego comparamos con la cantidad puesta para comprobar que la cantidad NO es mayor que la disponible
 									int cantidadDispo = rss.getInt("cantidad_disponible");
-									System.out.println(cantidadDispo);
 									if(cantidadDispo >= cantidad) {
 										PreparedStatement pst1 = conexion.prepareStatement(sql1);
 										boolean rs = pst1.execute();
@@ -465,7 +460,7 @@ public class Sociedad extends JFrame {
 										pst2.execute();
 										
 										}else {
-											JOptionPane.showMessageDialog(null,"Has introducido " + cantidad + " y solo quedan " + cantidadDispo);
+											JOptionPane.showMessageDialog(null,"Has introducido " + cantidad + " y solo quedan " + cantidadDispo + " disponibles");
 										}
 									}
 
@@ -610,7 +605,7 @@ public class Sociedad extends JFrame {
 				txtfield_cantidadDisponible.setText(Integer.toString(nuevaCantidadDisponible));
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("Cantidad está a 0");
+			//System.out.println("Cantidad está a 0");
 			txtfield_cantidad.setText("1");
 			e.printStackTrace();
 		}
