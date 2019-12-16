@@ -134,7 +134,6 @@ public class Sociedad extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		txtfield_cantidad = new JTextField();
-		txtfield_cantidad.setText("1");
 		txtfield_cantidad.setEditable(false);
 		txtfield_cantidad.setColumns(10);
 		txtfield_cantidad.setBounds(559, 35, 46, 31);
@@ -162,6 +161,7 @@ public class Sociedad extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					actualizar();
+					btnPagar.setEnabled(true);
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
@@ -184,6 +184,7 @@ public class Sociedad extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					actualizar();
+					btnPagar.setEnabled(true);
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
@@ -206,6 +207,7 @@ public class Sociedad extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					actualizar();
+					btnPagar.setEnabled(true);
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
@@ -228,6 +230,7 @@ public class Sociedad extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					actualizar();
+					btnPagar.setEnabled(true);
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
@@ -250,6 +253,7 @@ public class Sociedad extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					actualizar();
+					btnPagar.setEnabled(true);
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
@@ -272,6 +276,7 @@ public class Sociedad extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					actualizar();
+					btnPagar.setEnabled(true);
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
@@ -294,6 +299,7 @@ public class Sociedad extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					actualizar();
+					btnPagar.setEnabled(true);
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
@@ -316,6 +322,7 @@ public class Sociedad extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					actualizar();
+					btnPagar.setEnabled(true);
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
@@ -338,6 +345,7 @@ public class Sociedad extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					actualizar();
+					btnPagar.setEnabled(true);
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
@@ -360,6 +368,7 @@ public class Sociedad extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				try {
 					actualizar();
+					btnPagar.setEnabled(true);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				} catch (SQLException e) {
@@ -421,7 +430,7 @@ public class Sociedad extends JFrame {
 								Class.forName("com.mysql.jdbc.Driver");
 								Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
 								//La sql1 resta la cantidad comprada al producto en la bd
-								//La sql2 añade a la entidad "gastos" en la bd la cantidad gastada en el producto, para luego hacer un seguimiento de los gastos
+								//La sql2 añade a la entidad "gastos" en la bd la cantidad gastada en el producto, para luego hacer un seguimiento de los gastos realizados
 								String sql1 = "UPDATE productos SET cantidad_disponible = cantidad_disponible - "+cantidad+" WHERE nombre = '"+nom+"';";
 								String sql2 = "INSERT INTO gastos (id_usuario, gasto) values (?,?)";
 
@@ -602,7 +611,6 @@ public class Sociedad extends JFrame {
 		btt_7.setEnabled(true);
 		btt_8.setEnabled(true);
 		btt_9.setEnabled(true);
-		btnPagar.setEnabled(true);
 		btt_borrar.setEnabled(true);
 	}
 }

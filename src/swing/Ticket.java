@@ -52,9 +52,9 @@ public class Ticket extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblQuieresImprimirUn = new JLabel("\u00BFQuieres imprimir un ticket?");
+		JLabel lblQuieresImprimirUn = new JLabel("\u00BFDesea continuar y comprar lo seleccionado?");
 		lblQuieresImprimirUn.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblQuieresImprimirUn.setBounds(115, 26, 206, 20);
+		lblQuieresImprimirUn.setBounds(54, 27, 341, 20);
 		contentPane.add(lblQuieresImprimirUn);
 		
 		btnSi = new JButton("SI");
