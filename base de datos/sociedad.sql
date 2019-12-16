@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-12-2019 a las 09:13:50
+-- Tiempo de generación: 16-12-2019 a las 11:00:15
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -31,14 +31,20 @@ CREATE TABLE IF NOT EXISTS `gastos` (
   `id_usuario` int(11) NOT NULL,
   `gasto` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `gastos`
 --
 
 INSERT INTO `gastos` (`id`, `id_usuario`, `gasto`) VALUES
-(1, 1, 2.1);
+(1, 1, 2.1),
+(2, 1, 3.6),
+(3, 1, 1.2),
+(4, 1, 5.5),
+(5, 1, 1.05),
+(6, 1, 1.05),
+(7, 1, 3.15);
 
 -- --------------------------------------------------------
 
@@ -75,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `tipo` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `cantidad_disponible` int(11) NOT NULL,
   `precio` float NOT NULL,
+  `minimo_disponible` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
 
@@ -82,14 +89,14 @@ CREATE TABLE IF NOT EXISTS `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `nombre`, `tipo`, `cantidad_disponible`, `precio`) VALUES
-(2, 'fanta naranja', 'refresco', 21, 1.2),
-(3, 'vino', 'bebida_alcoholica', 20, 3.5),
-(4, 'cerveza', 'bebida_alcoholica', 27, 1.8),
-(5, 'tabaco a', 'tabaco', 8, 5.5),
-(6, 'tabaco b', 'tabaco', 7, 6.3),
-(7, 'Coca cola', 'refresco', 14, 1.05),
-(8, 'Nestea', 'refresco', 4, 1.2);
+INSERT INTO `productos` (`id`, `nombre`, `tipo`, `cantidad_disponible`, `precio`, `minimo_disponible`) VALUES
+(2, 'fanta naranja', 'refresco', 21, 1.2, 10),
+(3, 'vino', 'bebida_alcoholica', 20, 3.5, 7),
+(4, 'cerveza', 'bebida_alcoholica', 25, 1.8, 10),
+(5, 'tabaco a', 'tabaco', 7, 5.5, 5),
+(6, 'tabaco b', 'tabaco', 7, 6.3, 5),
+(7, 'Coca cola', 'refresco', 9, 1.05, 10),
+(8, 'Nestea', 'refresco', 15, 1.2, 5);
 
 -- --------------------------------------------------------
 
@@ -145,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `num_usuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `pass_usuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -153,7 +160,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre`, `num_usuario`, `pass_usuario`) VALUES
 (1, 'Usuario', '111', '222'),
-(2, 'prueba', '1', '1');
+(2, 'prueba', '1', '1'),
+(3, 'usuario_sha', '10', 'b1d5781111d84f7b3fe4');
 
 --
 -- Restricciones para tablas volcadas
