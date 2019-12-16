@@ -17,6 +17,7 @@ import bean.Gasto;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -431,28 +432,43 @@ public class Sociedad extends JFrame {
 								Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
 								//La sql1 resta la cantidad comprada al producto en la bd
 								//La sql2 añade a la entidad "gastos" en la bd la cantidad gastada en el producto, para luego hacer un seguimiento de los gastos realizados
+								//La sqlCantidad en un select para consultar la cantidad disponible del producto y poder hacer una comparacion despues y que no se pueda quedar esta cantidad en negativo
 								String sql1 = "UPDATE productos SET cantidad_disponible = cantidad_disponible - "+cantidad+" WHERE nombre = '"+nom+"';";
 								String sql2 = "INSERT INTO gastos (id_usuario, gasto) values (?,?)";
-
-								PreparedStatement pst1 = conexion.prepareStatement(sql1);
-								boolean rs = pst1.execute();
-								rs = true;
-
-								TicketFinal ticketFinal = new TicketFinal();
-								ticketFinal.setVisible(true);
-								ticketFinal.txtField_producto.setText(nom);						
-								ticketFinal.txtField_precio.setText(roundRes.toString() + "€");
-								String cant = Integer.toString(cantidad);
-								ticketFinal.txtField_cantidad.setText(cant);
+								String sqlCantidad_dispo = "SELECT * FROM productos WHERE nombre = '"+nom+"'";
 								
-								PreparedStatement pst2 = conexion.prepareStatement(sql2);
-								Gasto gasto = new Gasto();
-								gasto.setId_usuario(Login.username);
-								gasto.setCantidad(roundRes);
-								
-								pst2.setString(1, gasto.getId_usuario());
-								pst2.setDouble(2, gasto.getCantidad());
-								pst2.execute();
+								PreparedStatement pstCantidad_dispo = conexion.prepareStatement(sqlCantidad_dispo);
+								ResultSet rss = pstCantidad_dispo.executeQuery();
+								while (rss.next()){
+									//Se coge la cantidad disponible del producto y luego comparamos con la cantidad puesta para comprobar que la cantidad NO es mayor que la disponible
+									int cantidadDispo = rss.getInt("cantidad_disponible");
+									System.out.println(cantidadDispo);
+									if(cantidadDispo >= cantidad) {
+										PreparedStatement pst1 = conexion.prepareStatement(sql1);
+										boolean rs = pst1.execute();
+										rs = true;
+		
+										TicketFinal ticketFinal = new TicketFinal();
+										ticketFinal.setVisible(true);
+										ticketFinal.txtField_producto.setText(nom);						
+										ticketFinal.txtField_precio.setText(roundRes.toString() + "€");
+										String cant = Integer.toString(cantidad);
+										ticketFinal.txtField_cantidad.setText(cant);
+										
+										PreparedStatement pst2 = conexion.prepareStatement(sql2);
+										Gasto gasto = new Gasto();
+										gasto.setId_usuario(Login.username);
+										gasto.setCantidad(roundRes);
+										
+										pst2.setString(1, gasto.getId_usuario());
+										pst2.setDouble(2, gasto.getCantidad());
+										pst2.execute();
+										
+										}else {
+											JOptionPane.showMessageDialog(null, "Has introducido " + cantidad + " y solo quedan " + cantidadDispo);
+										}
+									}
+
 							} catch (SQLException e1) {
 								e1.printStackTrace();
 							} catch (ClassNotFoundException e1) {

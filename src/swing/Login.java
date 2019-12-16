@@ -123,7 +123,7 @@ public class Login extends JFrame {
 							}else {
 								JOptionPane.showMessageDialog(null, "Datos incorrectos, intentalo de nuevo");
 							}
-							}
+						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
