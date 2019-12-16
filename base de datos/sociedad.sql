@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-12-2019 a las 10:52:32
+-- Tiempo de generación: 16-12-2019 a las 09:13:50
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -19,6 +19,26 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sociedad`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gastos`
+--
+
+CREATE TABLE IF NOT EXISTS `gastos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `gasto` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `gastos`
+--
+
+INSERT INTO `gastos` (`id`, `id_usuario`, `gasto`) VALUES
+(1, 1, 2.1);
 
 -- --------------------------------------------------------
 
@@ -56,19 +76,20 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `cantidad_disponible` int(11) NOT NULL,
   `precio` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `tipo`, `cantidad_disponible`, `precio`) VALUES
-(2, 'fanta naranja', 'refresco', 25, 1.2),
+(2, 'fanta naranja', 'refresco', 21, 1.2),
 (3, 'vino', 'bebida_alcoholica', 20, 3.5),
 (4, 'cerveza', 'bebida_alcoholica', 27, 1.8),
 (5, 'tabaco a', 'tabaco', 8, 5.5),
 (6, 'tabaco b', 'tabaco', 7, 6.3),
-(7, 'Coca cola', 'refresco', 40, 1.05);
+(7, 'Coca cola', 'refresco', 14, 1.05),
+(8, 'Nestea', 'refresco', 4, 1.2);
 
 -- --------------------------------------------------------
 
@@ -86,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   KEY `mesa` (`mesa`),
   KEY `hora` (`hora`),
   KEY `hora_2` (`hora`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `reservas`
@@ -94,7 +115,23 @@ CREATE TABLE IF NOT EXISTS `reservas` (
 
 INSERT INTO `reservas` (`id`, `id_usuario`, `fecha`, `hora`, `mesa`) VALUES
 (13, 1, '2019-12-20', '14:00', 'mesa 1'),
-(14, 1, '2019-12-13', '13:00', 'mesa 1');
+(14, 1, '2019-12-13', '13:00', 'mesa 1'),
+(15, 1, '2019-12-13', '13:00', 'mesa 2');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reserva_usuario`
+--
+
+CREATE TABLE IF NOT EXISTS `reserva_usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `id_reserva` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_reserva` (`id_reserva`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -127,6 +164,13 @@ INSERT INTO `usuarios` (`id`, `nombre`, `num_usuario`, `pass_usuario`) VALUES
 --
 ALTER TABLE `reservas`
   ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`mesa`) REFERENCES `mesa` (`nombre`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `reserva_usuario`
+--
+ALTER TABLE `reserva_usuario`
+  ADD CONSTRAINT `reserva_usuario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reserva_usuario_ibfk_2` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
