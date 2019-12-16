@@ -465,7 +465,7 @@ public class Sociedad extends JFrame {
 										pst2.execute();
 										
 										}else {
-											JOptionPane.showMessageDialog(null, "Has introducido " + cantidad + " y solo quedan " + cantidadDispo);
+											JOptionPane.showMessageDialog(null,"Has introducido " + cantidad + " y solo quedan " + cantidadDispo);
 										}
 									}
 
