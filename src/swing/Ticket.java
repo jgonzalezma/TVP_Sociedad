@@ -58,6 +58,11 @@ public class Ticket extends JFrame {
 		contentPane.add(lblQuieresImprimirUn);
 		
 		btnSi = new JButton("SI");
+		btnSi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		btnSi.setBackground(new Color(0, 255, 0));
 		btnSi.setBounds(54, 121, 113, 41);
 		contentPane.add(btnSi);

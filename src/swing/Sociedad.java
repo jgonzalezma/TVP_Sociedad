@@ -578,6 +578,7 @@ public class Sociedad extends JFrame {
 	public void anadirNumero(int num) {
 		txtfield_cantidad.setText(txtfield_cantidad.getText() + num);
 		cantidad = Integer.parseInt(txtfield_cantidad.getText());
+		btnPagar.setEnabled(true);
 	}
 	
 	//Función para actualizar el precio del producto clickado
