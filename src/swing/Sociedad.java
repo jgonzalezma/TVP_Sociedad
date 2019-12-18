@@ -1,6 +1,7 @@
 package swing;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,17 +19,16 @@ import bean.Gasto;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 
 public class Sociedad extends JFrame {
@@ -81,24 +81,6 @@ public class Sociedad extends JFrame {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection conexion = null;
 		conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
-			
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
-		JMenuItem mntmRefrescos = new JMenuItem("Refrescos");
-		mntmRefrescos.setIcon(new ImageIcon("C:\\Users\\josu\\eclipse-workspace\\Login sociedad\\img\\i_refresco.png"));
-		mntmRefrescos.setHorizontalAlignment(SwingConstants.CENTER);
-		menuBar.add(mntmRefrescos);
-		
-		JMenuItem mntmBebi = new JMenuItem("Bebidas alcoholicas");
-		mntmBebi.setIcon(new ImageIcon("C:\\Users\\josu\\eclipse-workspace\\Login sociedad\\img\\i_alcohol.png"));
-		mntmBebi.setHorizontalAlignment(SwingConstants.CENTER);
-		menuBar.add(mntmBebi);
-		
-		JMenuItem mntmTabaco = new JMenuItem("Tabaco");
-		mntmTabaco.setIcon(new ImageIcon("C:\\Users\\josu\\eclipse-workspace\\Login sociedad\\img\\i_tabaco.png"));
-		mntmTabaco.setHorizontalAlignment(SwingConstants.CENTER);
-		menuBar.add(mntmTabaco);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.control);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -107,51 +89,52 @@ public class Sociedad extends JFrame {
 		
 		JPanel panel_refrescos = new JPanel();
 		panel_refrescos.setBackground(new Color(0, 204, 255));
-		panel_refrescos.setBounds(0, 0, 127, 472);
+		panel_refrescos.setBounds(0, 40, 127, 483);
 		contentPane.add(panel_refrescos);
 				
 		JPanel panel_bebidas = new JPanel();
 		panel_bebidas.setBackground(new Color(0, 204, 255));
-		panel_bebidas.setBounds(137, 0, 127, 472);
+		panel_bebidas.setBounds(137, 40, 127, 483);
 		contentPane.add(panel_bebidas);
 		
 		JPanel panel_tabaco = new JPanel();
 		panel_tabaco.setBackground(new Color(0, 204, 255));
-		panel_tabaco.setBounds(274, 0, 127, 472);
+		panel_tabaco.setBounds(274, 40, 127, 483);
 		contentPane.add(panel_tabaco);
 		
 		txtfield_cantidadDisponible = new JTextField();
 		txtfield_cantidadDisponible.setEditable(false);
-		txtfield_cantidadDisponible.setBounds(440, 35, 46, 31);
+		txtfield_cantidadDisponible.setBounds(440, 75, 46, 31);
 		contentPane.add(txtfield_cantidadDisponible);
 		txtfield_cantidadDisponible.setColumns(10);
 		
 		JLabel lblCantidadDisponible = new JLabel("Cantidad disponible");
-		lblCantidadDisponible.setBounds(419, 10, 127, 14);
+		lblCantidadDisponible.setBounds(419, 50, 127, 14);
 		contentPane.add(lblCantidadDisponible);
 		
 		JLabel lblNewLabel = new JLabel("Cantidad deseada");
-		lblNewLabel.setBounds(539, 10, 117, 14);
+		lblNewLabel.setBounds(539, 50, 117, 14);
 		contentPane.add(lblNewLabel);
 		
 		txtfield_cantidad = new JTextField();
 		txtfield_cantidad.setEditable(false);
 		txtfield_cantidad.setColumns(10);
-		txtfield_cantidad.setBounds(559, 35, 46, 31);
+		txtfield_cantidad.setBounds(559, 75, 46, 31);
 		contentPane.add(txtfield_cantidad);
 		
 		txtfield_precio = new JTextField();
 		txtfield_precio.setEditable(false);
 		txtfield_precio.setColumns(10);
-		txtfield_precio.setBounds(669, 35, 46, 31);
+		txtfield_precio.setBounds(669, 75, 46, 31);
 		contentPane.add(txtfield_precio);
 		
 		JLabel lblPrecio = new JLabel("Precio");
-		lblPrecio.setBounds(677, 10, 46, 14);
+		lblPrecio.setBounds(677, 50, 46, 14);
 		contentPane.add(lblPrecio);
 		
 		JPanel panelGestion = new JPanel();
-		panelGestion.setBounds(411, 0, 324, 472);
+		panelGestion.setBackground(new Color(0, 191, 255));
+		panelGestion.setBounds(411, 40, 324, 483);
 		contentPane.add(panelGestion);
 		panelGestion.setLayout(null);
 		
@@ -491,6 +474,34 @@ public class Sociedad extends JFrame {
 		lblProducto.setBounds(88, 434, 170, 14);
 		panelGestion.add(lblProducto);
 		
+		JPanel panel_menu = new JPanel();
+		panel_menu.setBounds(0, 0, 735, 39);
+		contentPane.add(panel_menu);
+		panel_menu.setLayout(null);
+		
+		JLabel lblRefrescos = new JLabel("Refrescos");
+		lblRefrescos.setIcon(new ImageIcon("C:\\Users\\josu\\eclipse-workspace\\Login sociedad\\img\\i_refresco.png"));
+		lblRefrescos.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblRefrescos.setBounds(10, 0, 116, 39);
+		panel_menu.add(lblRefrescos);
+		
+		JLabel lblBebidasAlc = new JLabel("Bebidas alc.");
+		lblBebidasAlc.setIcon(new ImageIcon("C:\\Users\\josu\\eclipse-workspace\\Login sociedad\\img\\i_alcohol.png"));
+		lblBebidasAlc.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblBebidasAlc.setBounds(136, 0, 128, 39);
+		panel_menu.add(lblBebidasAlc);
+		
+		JLabel lblNewLabel_1 = new JLabel("Tabaco");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\josu\\eclipse-workspace\\Login sociedad\\img\\i_tabaco.png"));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_1.setBounds(284, 0, 128, 39);
+		panel_menu.add(lblNewLabel_1);
+		
+		JLabel lblSociedad = new JLabel("SOCIEDAD");
+		lblSociedad.setFont(new Font("Wide Latin", Font.PLAIN, 16));
+		lblSociedad.setBounds(518, 0, 207, 39);
+		panel_menu.add(lblSociedad);
+		
 		//Select de refrescos
 		try {
 			Statement st = conexion.createStatement();
@@ -499,6 +510,7 @@ public class Sociedad extends JFrame {
 			while(rs1.next()) {
 				String nombre = rs1.getString("nombre");
 				JButton btnNewButton = new JButton(nombre);
+				btnNewButton.setPreferredSize(new Dimension(120,25));
 				String precio = rs1.getString("precio");
 				int cantidadDisponible = rs1.getInt("cantidad_disponible");
 				rs1.getInt("id");
@@ -529,6 +541,7 @@ public class Sociedad extends JFrame {
 			while(rs2.next()) {
 				String nombre = rs2.getString("nombre");
 				JButton btnNewButton = new JButton(rs2.getString("nombre"));
+				btnNewButton.setPreferredSize(new Dimension(120,25));
 				String precio = rs2.getString("precio");
 				int cantidadDisponible = rs2.getInt("cantidad_disponible");
 				rs2.getInt("id");
@@ -559,6 +572,7 @@ public class Sociedad extends JFrame {
 			while(rs3.next()) {
 				String nombre = rs3.getString("nombre");
 				JButton btnNewButton = new JButton(nombre);
+				btnNewButton.setPreferredSize(new Dimension(120,25));
 				String precio = rs3.getString("precio");
 				int cantidadDisponible = rs3.getInt("cantidad_disponible");
 				rs3.getInt("id");
