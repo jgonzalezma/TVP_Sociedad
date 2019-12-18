@@ -20,7 +20,7 @@ public class Ticket extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	JButton btnSi;
+	public JButton btnSi;
 
 	/**
 	 * Launch the application.

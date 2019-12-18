@@ -10,6 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
@@ -81,5 +85,32 @@ public class LoginOpciones extends JFrame {
 		lblaQuePantalla.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblaQuePantalla.setBounds(100, 46, 254, 25);
 		contentPane.add(lblaQuePantalla);
+		
+		JButton btnVerGastos = new JButton("Ver gastos");
+		btnVerGastos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Gastos gastos = new Gastos();
+				gastos.setVisible(true);
+				dispose();
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad","root", "");
+					String sql = "SELECT SUM(gasto) FROM gastos;";
+					PreparedStatement pst = conexion.prepareStatement(sql);
+					ResultSet rs = pst.executeQuery();
+					rs.next();
+					Double gasto = rs.getDouble(1);
+					Double roundGasto = Math.round(gasto * 100.0) / 100.0;
+					gastos.textField_gastos.setText(roundGasto+"€");
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+			}
+		});
+		btnVerGastos.setBounds(136, 180, 149, 48);
+		contentPane.add(btnVerGastos);
 	}
 }
