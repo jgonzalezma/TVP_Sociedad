@@ -105,29 +105,9 @@ public class Sociedad extends JFrame {
 		
 		txtfield_cantidadDisponible = new JTextField();
 		txtfield_cantidadDisponible.setEditable(false);
-		txtfield_cantidadDisponible.setBounds(440, 75, 46, 31);
+		txtfield_cantidadDisponible.setBounds(440, 75, 58, 39);
 		contentPane.add(txtfield_cantidadDisponible);
 		txtfield_cantidadDisponible.setColumns(10);
-		
-		JLabel lblCantidadDisponible = new JLabel("Cantidad disponible");
-		lblCantidadDisponible.setBounds(419, 50, 127, 14);
-		contentPane.add(lblCantidadDisponible);
-		
-		JLabel lblNewLabel = new JLabel("Cantidad deseada");
-		lblNewLabel.setBounds(539, 50, 117, 14);
-		contentPane.add(lblNewLabel);
-		
-		txtfield_cantidad = new JTextField();
-		txtfield_cantidad.setEditable(false);
-		txtfield_cantidad.setColumns(10);
-		txtfield_cantidad.setBounds(559, 75, 46, 31);
-		contentPane.add(txtfield_cantidad);
-		
-		txtfield_precio = new JTextField();
-		txtfield_precio.setEditable(false);
-		txtfield_precio.setColumns(10);
-		txtfield_precio.setBounds(669, 75, 46, 31);
-		contentPane.add(txtfield_precio);
 		
 		JLabel lblPrecio = new JLabel("Precio");
 		lblPrecio.setBounds(677, 50, 46, 14);
@@ -482,6 +462,26 @@ public class Sociedad extends JFrame {
 		lblProducto.setBounds(88, 434, 170, 14);
 		panelGestion.add(lblProducto);
 		
+		txtfield_cantidad = new JTextField();
+		txtfield_cantidad.setBounds(140, 35, 58, 39);
+		panelGestion.add(txtfield_cantidad);
+		txtfield_cantidad.setEditable(false);
+		txtfield_cantidad.setColumns(10);
+		
+		txtfield_precio = new JTextField();
+		txtfield_precio.setBounds(256, 35, 58, 39);
+		panelGestion.add(txtfield_precio);
+		txtfield_precio.setEditable(false);
+		txtfield_precio.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Cant. deseada");
+		lblNewLabel.setBounds(136, 11, 101, 14);
+		panelGestion.add(lblNewLabel);
+		
+		JLabel lblCantidadDisponible = new JLabel("Cant. disponible");
+		lblCantidadDisponible.setBounds(10, 11, 101, 14);
+		panelGestion.add(lblCantidadDisponible);
+		
 		JPanel panel_menu = new JPanel();
 		panel_menu.setBounds(0, 0, 735, 39);
 		contentPane.add(panel_menu);
@@ -609,9 +609,13 @@ public class Sociedad extends JFrame {
 	}
 	
 	public void anadirNumero(int num) {
-		txtfield_cantidad.setText(txtfield_cantidad.getText() + num);
-		cantidad = Integer.parseInt(txtfield_cantidad.getText());
-		btnPagar.setEnabled(true);
+		int length = txtfield_cantidad.getText().length();
+		//Limitar la cantidad de productos a comprar a 3 cifras, el máximo de cantidad será 999
+		if (length < 3){
+			txtfield_cantidad.setText(txtfield_cantidad.getText() + num);
+			cantidad = Integer.parseInt(txtfield_cantidad.getText());
+			btnPagar.setEnabled(true);
+		}
 	}
 	
 	//Función para actualizar el precio del producto clickado
