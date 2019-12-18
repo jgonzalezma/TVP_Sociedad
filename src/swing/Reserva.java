@@ -25,6 +25,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import java.awt.Color;
 
 public class Reserva extends JFrame {
 
@@ -61,7 +62,6 @@ public class Reserva extends JFrame {
 		setBounds(100, 100, 300, 250);
 		panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setLayout(new BorderLayout(0, 0));
 		setContentPane(panel);
 
 		// Instanciar Componente
@@ -69,12 +69,15 @@ public class Reserva extends JFrame {
 
 		// Ubicar y agregar al panel
 		dateChooser.setBounds(0, 0, 50, 50);
+		panel.setLayout(null);
 
 		JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
+		dateChooser.setBounds(5, 0, 274, 55);
 
 		panel.add(dateChooser);
 
 		JLabel lblSeleccioneDiaPara = new JLabel("Seleccione dia para reservar mesa");
+		lblSeleccioneDiaPara.setBackground(new Color(0, 191, 255));
 		lblSeleccioneDiaPara.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dateChooser.add(lblSeleccioneDiaPara, BorderLayout.NORTH);
 
@@ -98,59 +101,68 @@ public class Reserva extends JFrame {
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
+				
+				JPanel panel_reservar = new JPanel();
+				panel_reservar.setBackground(new Color(0, 191, 255));
+				panel_reservar.setBounds(5, 101, 274, 99);
+				panel.add(panel_reservar);
+						panel_reservar.setLayout(null);
+				
+						JButton btnReservar = new JButton("Reservar");
+						btnReservar.setBounds(46, 25, 180, 40);
+						panel_reservar.add(btnReservar);
+						
+						panel_hora = new JPanel();
+						panel_hora.setBackground(new Color(0, 191, 255));
+						panel_hora.setBounds(5, 60, 274, 41);
+						panel.add(panel_hora);
+						
+						JLabel lbl_hora = new JLabel("Hora: ");
+						lbl_hora.setFont(new Font("Tahoma", Font.PLAIN, 14));
+						panel_hora.add(lbl_hora);
+						
+						comboBoxHora = new JComboBox<String>();
+						comboBoxHora.addItem("12:00");
+						comboBoxHora.addItem("13:00");
+						comboBoxHora.addItem("14:00");
+						comboBoxHora.addItem("15:00");
+						panel_hora.add(comboBoxHora);
+				btnReservar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Date date = dateChooser.getDate();
+						Date fechaparsed = new java.sql.Date(date.getTime());
+						// hay que parsear el date a sql date
+						try {
+							Class.forName("com.mysql.jdbc.Driver");
+							Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad", "root", "");
+							PreparedStatement pst = conexion
+									.prepareStatement("INSERT INTO reservas (id_usuario, fecha, hora, mesa) values (?,?,?,?)");
 
-		JButton btnReservar = new JButton("Reservar");
-		btnReservar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Date date = dateChooser.getDate();
-				Date fechaparsed = new java.sql.Date(date.getTime());
-				// hay que parsear el date a sql date
-				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/sociedad", "root", "");
-					PreparedStatement pst = conexion
-							.prepareStatement("INSERT INTO reservas (id_usuario, fecha, hora, mesa) values (?,?,?,?)");
+							Mesa mesa = new Mesa();
 
-					Mesa mesa = new Mesa();
+							mesa.setId_usuario(Login.username);
+							mesa.setFecha((java.sql.Date) fechaparsed);
+							String m = (String) comboBox.getSelectedItem();
+							String hora = (String) comboBoxHora.getSelectedItem();
+							mesa.setNombre(m);
+							mesa.setHora(hora);
 
-					mesa.setId_usuario(Login.username);
-					mesa.setFecha((java.sql.Date) fechaparsed);
-					String m = (String) comboBox.getSelectedItem();
-					String hora = (String) comboBoxHora.getSelectedItem();
-					mesa.setNombre(m);
-					mesa.setHora(hora);
+							pst.setString(1, mesa.getId_usuario());
+							pst.setDate(2, new java.sql.Date(mesa.getFecha().getTime()));
+							pst.setString(3, mesa.getHora());
+							pst.setString(4, mesa.getNombre());
+							pst.execute();
 
-					pst.setString(1, mesa.getId_usuario());
-					pst.setDate(2, new java.sql.Date(mesa.getFecha().getTime()));
-					pst.setString(3, mesa.getHora());
-					pst.setString(4, mesa.getNombre());
-					pst.execute();
-
-					Mesa_Reservada mesareservada = new Mesa_Reservada();
-					mesareservada.setVisible(true);
-					dispose();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		dateChooser.add(btnReservar, BorderLayout.SOUTH);
-		
-		panel_hora = new JPanel();
-		panel.add(panel_hora, BorderLayout.SOUTH);
-		
-		JLabel lbl_hora = new JLabel("Hora: ");
-		panel_hora.add(lbl_hora);
-		
-		comboBoxHora = new JComboBox<String>();
-		comboBoxHora.addItem("12:00");
-		comboBoxHora.addItem("13:00");
-		comboBoxHora.addItem("14:00");
-		comboBoxHora.addItem("15:00");
-		panel_hora.add(comboBoxHora);
+							Mesa_Reservada mesareservada = new Mesa_Reservada();
+							mesareservada.setVisible(true);
+							dispose();
+						} catch (ClassNotFoundException e1) {
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					}
+				});
 		
 	}
-
 }

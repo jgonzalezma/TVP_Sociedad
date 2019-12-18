@@ -96,7 +96,7 @@ public class TicketFinal extends JFrame {
 				dispose();
 			}
 		});
-		btnCerrar.setBounds(45, 197, 89, 23);
+		btnCerrar.setBounds(45, 197, 120, 23);
 		contentPane.add(btnCerrar);
 	}
 }
