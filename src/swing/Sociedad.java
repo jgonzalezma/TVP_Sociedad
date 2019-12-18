@@ -499,7 +499,7 @@ public class Sociedad extends JFrame {
 		
 		JLabel lblSociedad = new JLabel("SOCIEDAD");
 		lblSociedad.setFont(new Font("Wide Latin", Font.PLAIN, 16));
-		lblSociedad.setBounds(518, 0, 207, 39);
+		lblSociedad.setBounds(465, 0, 260, 39);
 		panel_menu.add(lblSociedad);
 		
 		//Select de refrescos
