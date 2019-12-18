@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-12-2019 a las 11:00:15
+-- Tiempo de generación: 18-12-2019 a las 09:00:04
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `gastos` (
   `id_usuario` int(11) NOT NULL,
   `gasto` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `gastos`
@@ -44,7 +44,8 @@ INSERT INTO `gastos` (`id`, `id_usuario`, `gasto`) VALUES
 (4, 1, 5.5),
 (5, 1, 1.05),
 (6, 1, 1.05),
-(7, 1, 3.15);
+(7, 1, 3.15),
+(8, 1, 2.4);
 
 -- --------------------------------------------------------
 
@@ -92,11 +93,11 @@ CREATE TABLE IF NOT EXISTS `productos` (
 INSERT INTO `productos` (`id`, `nombre`, `tipo`, `cantidad_disponible`, `precio`, `minimo_disponible`) VALUES
 (2, 'fanta naranja', 'refresco', 21, 1.2, 10),
 (3, 'vino', 'bebida_alcoholica', 20, 3.5, 7),
-(4, 'cerveza', 'bebida_alcoholica', 25, 1.8, 10),
+(4, 'cerveza', 'bebida_alcoholica', 20, 1.8, 10),
 (5, 'tabaco a', 'tabaco', 7, 5.5, 5),
 (6, 'tabaco b', 'tabaco', 7, 6.3, 5),
 (7, 'Coca cola', 'refresco', 9, 1.05, 10),
-(8, 'Nestea', 'refresco', 15, 1.2, 5);
+(8, 'Nestea', 'refresco', 13, 1.2, 5);
 
 -- --------------------------------------------------------
 
