@@ -1,5 +1,6 @@
 package swing;
 
+import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -389,7 +390,14 @@ public class Sociedad extends JFrame {
 						e1.printStackTrace();
 					} catch (SQLException e1) {
 						e1.printStackTrace();
+					}catch (NumberFormatException e2) {
+						/*Esta excepcion en concreto salta cuando la cantidad del producto se borra y aparece como string vacio, en este caso deshabilito la opcion de pagar
+						 * para que el usuario no pueda coger un producto sin la cantidad especificada
+						 */
+						btnPagar.setEnabled(false);	
 					}
+				}else {
+						btnPagar.setEnabled(false); // Con esto aseguramos que siga deshabilitado a menos que haya una cantidad especificada
 				}
 			}
 		});
@@ -608,7 +616,6 @@ public class Sociedad extends JFrame {
 	
 	//Función para actualizar el precio del producto clickado
 	public void actualizar() throws ClassNotFoundException, SQLException {
-		try {
 			if(tipo == "refresco" || tipo == "bebida_alcoholica" || tipo == "tabaco") {
 				String cant = txtfield_cantidad.getText();
 				Double p = Double.parseDouble(nuevoprecio);
@@ -618,11 +625,6 @@ public class Sociedad extends JFrame {
 				txtfield_precio.setText(Double.toString(roundRes) + "€");
 				txtfield_cantidadDisponible.setText(Integer.toString(nuevaCantidadDisponible));
 			}
-		} catch (NumberFormatException e) {
-			//System.out.println("Cantidad está a 0");
-			txtfield_cantidad.setText("1");
-			e.printStackTrace();
-		}
 	}
 	
 	//Funcion para activar todos los botones, al hacer click en cualquier producto se llamará a esta función
