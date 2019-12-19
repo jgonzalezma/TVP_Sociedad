@@ -22,6 +22,7 @@ public class Gastos extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	public JTextField textField_gastos;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -61,5 +62,16 @@ public class Gastos extends JFrame {
 		textField_gastos.setBounds(158, 102, 98, 42);
 		contentPane.add(textField_gastos);
 		textField_gastos.setColumns(10);
+		
+		btnNewButton = new JButton("Volver atras");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				LoginOpciones frame = new LoginOpciones();
+				frame.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(135, 176, 145, 35);
+		contentPane.add(btnNewButton);
 	}
 }
