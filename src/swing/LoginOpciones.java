@@ -5,6 +5,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import reportes.Conexion;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -61,7 +68,7 @@ public class LoginOpciones extends JFrame {
 				dispose();
 			}
 		});
-		btnReservarMesa.setBounds(233, 108, 149, 48);
+		btnReservarMesa.setBounds(233, 108, 168, 48);
 		contentPane.add(btnReservarMesa);
 		
 		JButton btnComprarProductos = new JButton("Comprar productos");
@@ -78,7 +85,7 @@ public class LoginOpciones extends JFrame {
 				}
 			}
 		});
-		btnComprarProductos.setBounds(47, 108, 149, 48);
+		btnComprarProductos.setBounds(28, 108, 168, 48);
 		contentPane.add(btnComprarProductos);
 		
 		JLabel lblaQuePantalla = new JLabel("\u00BFA que pantalla desea ir?");
@@ -110,7 +117,27 @@ public class LoginOpciones extends JFrame {
 
 			}
 		});
-		btnVerGastos.setBounds(136, 180, 149, 48);
+		btnVerGastos.setBounds(28, 167, 168, 48);
 		contentPane.add(btnVerGastos);
+		
+		JButton btnNewButton = new JButton("Ver reporte de stock");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// se muestra en una ventana aparte para su descarga
+				JasperPrint jasperPrintWindow;
+				try {
+					jasperPrintWindow = JasperFillManager.fillReport(
+							"C:\\Users\\josu\\git\\TVP_Sociedad\\informe\\ReporteProductos.jasper", null,
+							Conexion.conectar());
+					JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow);
+					jasperViewer.setVisible(true);
+				} catch (JRException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setBounds(233, 167, 168, 48);
+		contentPane.add(btnNewButton);
 	}
 }
